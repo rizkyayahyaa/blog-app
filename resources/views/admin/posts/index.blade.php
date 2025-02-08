@@ -4,43 +4,52 @@
 <div class="page-wrapper page-settings">
     <div class="content">
         <div class="page-header">
-            <h4>Manage Posts</h4>
-            <a href="{{ route('posts.create') }}" class="btn btn-primary">Create New Post</a>
+            <h4>Posts List</h4>
+            <!-- Create Post Button -->
+            <a href="{{ route('posts.create') }}" class="btn btn-primary">Create Post</a>
         </div>
+
         <div class="row">
-            <div class="col-12">
-                <div class="table-responsive table-div">
-                    <table class="table datatable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Title</th>
-                                <th>Content</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($posts as $post)
+            <!-- Display Posts -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{{ Str::limit($post->content, 100) }}</td>
-                                    <td>
-                                        <a class="btn btn-warning" href="{{ route('posts.edit', $post->id) }}">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <form action="{{ route('posts.destroy', $post->id) }}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
-                                        </form>
-                                    </td>
+                                    <th>#</th>
+                                    <th>Title</th>
+                                    <th>Content</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($posts as $post)
+                                <tr>
+                                    <td>{{ $post->id }}</td>
+                                    <td>{{ $post->title }}</td>
+                                    <td>{{ $post->content }}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Display Users -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Users List</h5>
+                        <div class="list-group">
+                            @foreach ($users as $user)
+                            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                <span>{{ $user->name }}</span>
+                                <span class="badge bg-primary rounded-pill">{{ $user->email }}</span>
+                            </a>
                             @endforeach
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

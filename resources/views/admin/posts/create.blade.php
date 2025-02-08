@@ -13,6 +13,17 @@
                         <form action="{{ route('posts.store') }}" method="POST">
                             @csrf
 
+                            <!-- Dropdown for selecting user_id from users table -->
+                            <div class="mb-3">
+                                <label for="user_id" class="form-label">User</label>
+                                <select class="form-control" id="user_id" name="user_id" required>
+                                    <option value="" disabled selected>Select User</option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="mb-3">
                                 <label for="title" class="form-label">Title</label>
                                 <input type="text" class="form-control" id="title" name="title" required>
