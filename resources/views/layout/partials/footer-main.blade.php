@@ -1,6 +1,29 @@
 <!-- Footer -->
 <footer class="footer">
 
+    <style>
+        .footer {
+            background: rgba(0, 0, 0, 0.6); /* Transparan hitam 60% */
+            color: #ffffff; /* Warna teks putih */
+            padding: 50px 0;
+        }
+
+        .footer a {
+            color: #ffffff; /* Warna link putih */
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #f0ad4e; /* Warna hover oranye */
+        }
+
+        .footer-bottom {
+            background: rgba(0, 0, 0, 0.3); /* Transparansi lebih tipis */
+            padding: 20px 0;
+            text-align: center;
+        }
+    </style>
+
     <!-- Footer Top -->
     <div class="footer-top">
         <div class="container">
@@ -9,7 +32,7 @@
                     <!-- Footer Widget -->
                     <div class="footer-widget">
                         <div class="footer-logo">
-                            <a href="{{url('/')}}"><img src="{{ URL::asset('/assets/img/carss.png')}}" alt="logo"></a>
+                            <a href="{{url('/')}}"><img src="{{ URL::asset('/assets/img/best.png')}}" alt="logo"></a>
                         </div>
                         <div class="footer-content">
                             <p>Car rental is a service allowing individuals or companies to rent vehicles for a short period, ranging from a few hours to several weeks. It's ideal for those who need a temporary vehicle for personal, business, or travel purposes without owning one.</p>

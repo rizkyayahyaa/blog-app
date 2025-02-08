@@ -18,8 +18,7 @@
                 </a>
                 @endif
                 <a href="{{url('/')}}" class="navbar-brand logo">
-                    <img src="{{ URL::asset('/assets/img/carss.png')}}" class="img-fluid" alt="Logo">
-                    <h1>Rental</h1>
+                    <img src="{{ URL::asset('/assets/img/best.png')}}" class="img-fluid" alt="Logo" width="30" height="auto">
                 </a>
                 <a href="{{url('/')}}" class="navbar-brand logo-small">
                     <img src="{{ URL::asset('/assets/img/logo-small.png')}}" class="img-fluid" alt="Logo">
@@ -35,10 +34,6 @@
                 <ul class="main-nav">
                     <li class="has-submenu megamenu {{ Request::is('/','index-2','index-3','index-4','index-5','index-6','index-7','index-8','index-9') ? 'active' : '' }}">
                         <a href="{{url('/')}}">Home</a>
-                    </li>
-
-                    <li class="has-submenu {{ Request::is('customer-dashboard', 'customer-booking-calendar', 'customer-booking', 'customer-favourite', 'customer-wallet', 'customer-reviews', 'customer-chat', 'customer-profile', 'security-settings', 'customer-notifications', 'connected-apps') ? 'active' : '' }}">
-                        <a href="#">All Cars</a>
                     </li>
 
                     <li class="has-submenu {{ Request::is('provider-dashboard', 'provider-services', 'provider-booking', 'provider-payout', 'provider-availability', 'provider-holiday', 'provider-coupons', 'provider-offers', 'provider-reviews', 'provider-earnings', 'provider-chat') ? 'active' : '' }}">
