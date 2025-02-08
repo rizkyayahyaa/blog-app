@@ -1,141 +1,266 @@
-@extends('layout.mainlayout')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>Truelysell | Template</title>
 
-@section('content')
-<div class="container">
-    <div class="home-banner home-banner-three">
-        <div class="row align-items-center w-100">
-            <div class="col-lg-6 col-md-12 mx-auto">
-                <div class="section-search section-section-five">
-                    <h1 style="color: blue">The Largest Professional <span>Car</span> Rental</h1>
-                    <p style="color: grey">
-                        Car rental is a service allowing individuals or companies to rent vehicles for a short period, ranging from a few hours to several weeks. It's ideal for those who need a temporary vehicle for personal, business, or travel purposes without owning one.
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="floating-img">
-                    <img src="#" alt="audi" class="img-fluid rotate-img">
-                </div>
-                <div class="car-five-arrow-img">
-                    <img src="#" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /Banner Section -->
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="assets/img/favicon.png">
 
-<!-- Feature Section -->
-<section class="featured-categories-section">
-    <div class="featured-category-bg-img">
-        <img src="{{ URL::asset('/assets/img/car-category-five.png') }}" alt="">
-    </div>
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <div class="section-heading car-wash-heading car-wash-feature aos" data-aos="fade-up">
-                <div class="car-wash-img-five">
-                    <img src="{{ URL::asset('/assets/img/icons/car-wash-header-1.svg') }}" alt=""
-                        class="car-wash-header-one">
-                    <h2>Cars Available</h2>
-                    <img src="{{ URL::asset('/assets/img/icons/car-wash-header-2.svg') }}" alt=""
-                        class="car-wash-header-two">
-                </div>
-                <p>What do you need to find?</p>
-            </div>
-        </div>
-    </div>
-    {{-- <div class="row">
-        @foreach($cars as $car)
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="service-widget service-two aos" data-aos="fade-up">
-                    <div class="service-img service-four-img">
-                        @if($car->photo)
-                            <img class="img-fluid serv-img" alt="{{ $car->name }}" src="{{ asset('storage/' . $car->photo) }}">
-                        @else
-                            <img class="img-fluid serv-img" alt="No Image" src="{{ URL::asset('/assets/img/no-image.png') }}">
-                        @endif
-                    </div>
-                    <div class="service-content service-content-five">
-                        <div class="feature-content-bottom">
-                            <h3>{{ $car->name }}</h3>
-                            <p>Model: {{ $car->model }}</p>
-                            <p>Price: Rp{{ number_format($car->price, 2) }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div> --}}
-</section>
-<!-- /Feature Section -->
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
-<!-- Booking Cars Available -->
-<section class="feature-category-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="section-heading car-wash-heading aos" data-aos="fade-up">
-                    <div class="car-wash-img-five">
-                        <div class="car-wash-img-five">
-                            <img src="{{ URL::asset('/assets/img/icons/car-wash-header-1.svg') }}" alt=""
-                                class="car-wash-header-one">
-                            <h2>Booking Cars Available</h2>
-                            <img src="{{ URL::asset('/assets/img/icons/car-wash-header-2.svg') }}" alt=""
-                                class="car-wash-header-two">
-                        </div>
-                    </div>
-                    <p>What do you need to find?</p>
-                </div>
-            </div>
-        </div>
-        {{-- <div class="row">
-            @foreach($cars as $car)
-                <div class="col-lg-4 col-md-6 col-12">
-                    <div class="service-widget aos" data-aos="fade-up">
-                        <div class="service-img">
-                            @if($car->photo)
-                                <img class="img-fluid serv-img" alt="{{ $car->name }}" src="{{ asset('storage/' . $car->photo) }}">
-                            @else
-                                <img class="img-fluid serv-img" alt="No Image" src="{{ URL::asset('/assets/img/no-image.png') }}">
-                            @endif
-                            <div class="fav-item ">
-                                <div class="features-service-five">
-                                    <div class="features-service-rating">
-                                        <i class="fas fa-star filled"></i><span>4.8</span>
-                                    </div>
-                                    <h6>Featured</h6>
-                                </div>
-                                <a href="javascript:void(0)" class="fav-icon fav-icon-five">
-                                    <i class="feather-heart"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="service-content service-feature-five">
-                            <h3 class="title">
-                                <a href="{{ route('book.form', ['carId' => $car->id]) }}">{{ $car->name }} - {{ $car->model }}</a>
-                            </h3>
-                            <div class="feature-services-five">
-                                <h6>Rp{{ number_format($car->price, 2) }}</h6><span>{{ $car->discount_price ? '$'.number_format($car->discount_price, 2) : '' }}</span>
-                            </div>
-                            <div class="feature-service-botton">
-                                <div class="feature-service-btn">
-                                    <a href="{{ route('book.form', ['carId' => $car->id]) }}">Book Car</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div> --}}
-        {{-- <div class="btn-sec btn-sec-five aos" data-aos="fade-up">
-            <a href="{{ url('search') }}" class="btn btn-primary btn-view">View All</a>
-        </div> --}}
-    </div>
-</section>
-<!-- /Featured Services -->
+	<!-- Fontawesome CSS -->
+	<link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
 
-@component('components.model-popup')
-@endcomponent
-@component('components.scrollToTop')
-@endcomponent
-@endsection
+	<!-- Fearther CSS -->
+	<link rel="stylesheet" href="assets/css/feather.css">
+
+	<!-- select CSS -->
+	<link rel="stylesheet" href="assets/plugins/select2/css/select2.min.css">
+
+    <!-- Datetimepicker CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
+
+	<!-- Main CSS -->
+	<link rel="stylesheet" href="assets/css/style.css">
+
+	<!-- Custom Style for Background -->
+	<style>
+body {
+    position: relative;
+    background-image: url('{{ asset('assets/img/best.png') }}');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: rgba(0, 0, 0, 0.5); /* Warna latar belakang dengan transparansi */
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay hitam dengan transparansi */
+    z-index: -1; /* Agar overlay tidak menutupi konten */
+}
+
+    </style>
+</head>
+
+<body>
+
+	<!-- Main Wrapper -->
+	<div class="main-wrapper">
+
+		<!-- Header -->
+		<header class="header">
+			<div class="container">
+				<nav class="navbar navbar-expand-lg header-nav">
+					<div class="navbar-header">
+						<a id="mobile_btn" href="javascript:void(0);">
+							<span class="bar-icon">
+								<span></span>
+								<span></span>
+								<span></span>
+							</span>
+						</a>
+						<a href="index.html" class="navbar-brand logo">
+							<img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+						</a>
+						<a href="index.html" class="navbar-brand logo-small">
+							<img src="assets/img/logo-small.png" class="img-fluid" alt="Logo">
+						</a>
+					</div>
+					<div class="main-menu-wrapper">
+						<div class="menu-header">
+							<a href="index.html" class="menu-logo">
+								<img src="assets/img/logo.png" class="img-fluid" alt="Logo">
+							</a>
+							<a id="menu_close" class="menu-close" href="javascript:void(0);"> <i class="fas fa-times"></i></a>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</header>
+		<!-- /Header -->
+
+		<div class="content">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-4 col-lg-3 theiaStickySidebar">
+
+						<!-- Settings Menu -->
+						<div class="settings-widget">
+							<div class="settings-header">
+								<div class="settings-img">
+									<img src="assets/img/profiles/avatar-02.jpg" alt="user">
+								</div>
+								<h6>John Smith</h6>
+								<p>Member Since Sep 2021</p>
+							</div>
+							<div class="settings-menu">
+								<ul>
+									<li>
+										<a href="customer-dashboard.html">
+											<i class="feather-grid"></i> <span>Dashboard</span>
+										</a>
+									</li>
+									<li>
+										<a href="customer-booking.html">
+											<i class="feather-smartphone"></i> <span>Bookings</span>
+										</a>
+									</li>
+									<li>
+										<a href="customer-favourite.html" class="active">
+											<i class="feather-heart"></i> <span>Favorites</span>
+										</a>
+									</li>
+									<li>
+										<a href="customer-wallet.html">
+											<i class="feather-credit-card"></i> <span>Wallet</span>
+										</a>
+									</li>
+									<li>
+										<a href="customer-reviews.html">
+											<i class="feather-star"></i> <span>Reviews</span>
+										</a>
+									</li>
+									<li>
+										<a href="customer-chat.html">
+											<i class="feather-message-circle"></i> <span>Chat</span>
+										</a>
+									</li>
+									<li>
+										<a href="customer-profile.html">
+											<i class="feather-settings"></i> <span>Settings</span>
+										</a>
+									</li>
+									<li>
+										<a href="index.html">
+											<i class="feather-log-out"></i> <span>Logout</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- /Settings Menu -->
+					</div>
+
+
+					<div class="col-md-8 col-lg-9">
+
+						<!-- Sort -->
+						<div class="row align-items-center">
+
+							<div class="col-sm-6 d-flex align-items-center justify-content-end">
+
+								<div class="grid-listview">
+									<ul>
+										<li>
+											<a href="javascript:void(0);">
+												<img src="assets/img/icons/filter-icon.svg" alt="">
+											</a>
+										</li>
+										<li>
+											<a href="customer-favourite.html">
+												<i class="feather-grid"></i>
+											</a>
+										</li>
+										<li>
+											<a href="customer-booking.html">
+												<i class="feather-list"></i>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- /Sort -->
+
+						<div class="row">
+
+							<!-- Service List -->
+							<div class="col-xl-4 col-md-6">
+								<div class="service-widget servicecontent">
+									<div class="service-img">
+										<a href="service-details.html">
+											<img class="img-fluid serv-img" alt="Service Image" src="assets/img/services/service-04.jpg">
+										</a>
+										<div class="fav-item">
+											{{-- <a href="categories.html"><span class="item-cat">Car Wash</span></a> --}}
+											<a href="javascript:void(0)" class="fav-icon selected">
+												<i class="feather-heart"></i>
+											</a>
+										</div>
+										<div class="item-info">
+											<a href="providers.html"><span class="item-img"><img src="assets/img/profiles/avatar-01.jpg" class="avatar" alt=""></span></a>
+										</div>
+									</div>
+									<div class="service-content">
+										<h3 class="title">
+											<a href="service-details.html">Car Repair Services</a>
+										</h3>
+										<p><i class="feather-map-pin"></i>Maryland City, USA<span class="rate"><i class="fas fa-star filled"></i>4.9</span></p>
+										<div class="serv-info">
+											<h6>$50.00</h6>
+											<a href="booking.html" class="btn btn-book">Book Now</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /Service List -->
+
+						</div>
+
+						<!-- Pagination -->
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="review-pagination">
+									<ul class="pagination">
+										<li class="page-item">
+											<a class="page-link" href="#">1</a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="#">2 <span class="visually-hidden">(current)</span></a>
+										</li>
+										<li class="page-item">
+											<a class="page-link" href="#">3</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- /Pagination -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Cursor -->
+		<div class="mouse-cursor cursor-outer"></div>
+		<div class="mouse-cursor cursor-inner"></div>
+
+	</div>
+	<!-- /Main Wrapper -->
+
+	<!-- jQuery -->
+	<script src="assets/js/jquery-3.6.0.min.js"></script>
+	<!-- Bootstrap JS -->
+	<script src="assets/js/bootstrap.bundle.min.js"></script>
+	<!-- Feather JS -->
+	<script src="assets/js/feather.min.js"></script>
+	<!-- select2 JS -->
+	<script src="assets/plugins/select2/js/select2.min.js"></script>
+	<!-- Datepicker JS -->
+	<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
+	<!-- Custom JS -->
+	<script src="assets/js/script.js"></script>
+
+</body>
+</html>

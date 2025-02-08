@@ -52,15 +52,6 @@
                             <a href="{{url('login')}}">Login</a>
                         </li>
                     @else
-                        {{-- <li class="has-submenu {{ Request::is('car-rent', 'favorite-cars', 'car-management', 'payment-history') ? 'active' : '' }}">
-                            <a href="#">Car Services <i class="fas fa-chevron-down"></i></a>
-                            <ul class="submenu">
-                                <li class="{{ Request::is('car-rent') ? 'active' : '' }}"><a href="{{ route('cars.available') }}">Booking Cars</a></li>
-                                <li class="{{ Request::is('favorite-cars') ? 'active' : '' }}"><a href="{{url('favorite-cars')}}">Favorite Cars</a></li>
-                                <li class="{{ Request::is('car-management') ? 'active' : '' }}"><a href="{{url('car-management')}}">Car Management</a></li>
-                                <li class="{{ Request::is('payment-history') ? 'active' : '' }}"><a href="{{url('payment-history')}}">Payment History</a></li>
-                            </ul>
-                        </li> --}}
                         <li class="login-link">
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
