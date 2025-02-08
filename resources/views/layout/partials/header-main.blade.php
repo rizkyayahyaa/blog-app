@@ -69,6 +69,7 @@
                     <li class="nav-item">
                         <a class="nav-link header-login" href="{{url('/')}}"><i class="fa-regular fa-circle-user me-2"></i>Login</a>
                     </li>
+                    
                 @else
                     <li class="nav-item">
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
