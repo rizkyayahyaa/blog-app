@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
-      <title>Rental</title>
+      <title>BLOG APP</title>
 
       <!-- Favicon -->
       <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/img/carss.png')}}">

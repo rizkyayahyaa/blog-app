@@ -29,8 +29,8 @@
                         href="{{ url('admin/cars') }}"><i class="fa-solid fa-users"></i> <span>Manajemen Pengguna</span></a>
                 </li>
                 <li>
-                    <a class="{{ Request::is('admin/users') ? 'active' : '' }}"
-                        href="{{ url('admin/users') }}"><i class="fa-solid fa-pen"></i> <span>Manajemen Postingan</span></a>
+                    <a class="{{ Request::is('admin/posts*') ? 'active' : '' }}"
+                        href="{{ url('admin/posts') }}"><i class="fa-solid fa-pen"></i> <span>Manajemen Postingan</span></a>
                 </li>
                 <li>
                     <a class="{{ Request::is('admin/bookingcustomer*') ? 'active' : '' }}"
