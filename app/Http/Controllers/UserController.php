@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function login()
+    {
+        return view('auth.login');
+    }
+
+    public function register()
+    {
+        return view('auth.register');
+    }
+
     public function index()
     {
         $users = User::all();

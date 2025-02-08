@@ -8,7 +8,7 @@
       <title>BLOG APP</title>
 
       <!-- Favicon -->
-      <link rel="shortcut icon" type="image/x-icon" href="{{url('assets/img/carss.png')}}">
+      <link rel="shortcut icon" type="image/x-icon" href="#">
       @include('layout.partials.head-main')
     </head>
     <body>

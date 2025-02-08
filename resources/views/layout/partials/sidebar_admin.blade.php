@@ -34,8 +34,8 @@
                         href="{{ url('admin/posts') }}"><i class="fa-solid fa-pen"></i> <span>Manajemen Postingan</span></a>
                 </li>
                 <li>
-                    <a class="{{ Request::is('admin/bookingcustomer*') ? 'active' : '' }}"
-                        href="{{ url('admin/bookingcustomer') }}"><i class="fa-solid fa-comments"></i> <span>Manajemen Komentar</span></a>
+                    <a class="{{ Request::is('admin/comments*') ? 'active' : '' }}"
+                        href="{{ url('admin/comments') }}"><i class="fa-solid fa-comments"></i> <span>Manajemen Komentar</span></a>
                 </li>
                 <li>
                     <a class="{{ Request::is('admin/reports') ? 'active' : '' }}"

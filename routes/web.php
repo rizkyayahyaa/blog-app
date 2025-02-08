@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [UserController::class, 'login'])->name('login');
+Route::get('/register', [UserController::class, 'register'])->name('register');
 
 Route::prefix('admin')->group(function () {
 
@@ -19,6 +20,8 @@ Route::prefix('admin')->group(function () {
     Route::get('posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
     Route::put('posts/{id}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+    Route::get('posts/{postId}/comments', [CommentController::class, 'index'])->name('comments.index');
+
 
     Route::get('users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('users/create', [UserController::class, 'create'])->name('admin.users.create');
@@ -26,6 +29,13 @@ Route::prefix('admin')->group(function () {
     Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     Route::put('users/{id}', [UserController::class, 'update'])->name('admin.users.update');
     Route::delete('users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
+
+    Route::get('comments', [CommentController::class, 'index'])->name('comments.index');
+    Route::get('comments/create', [CommentController::class, 'create'])->name('comments.create');
+    Route::post('comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::get('comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+    Route::put('comments/{id}', [CommentController::class, 'update'])->name('comments.update');
+    Route::delete('comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 });
 

@@ -38,7 +38,7 @@
                     </li>
 
                     <li class="has-submenu {{ Request::is('customer-dashboard', 'customer-booking-calendar', 'customer-booking', 'customer-favourite', 'customer-wallet', 'customer-reviews', 'customer-chat', 'customer-profile', 'security-settings', 'customer-notifications', 'connected-apps') ? 'active' : '' }}">
-                        <a href="{{ route('cars.available') }}">All Cars</a>
+                        <a href="#">All Cars</a>
                     </li>
 
                     <li class="has-submenu {{ Request::is('provider-dashboard', 'provider-services', 'provider-booking', 'provider-payout', 'provider-availability', 'provider-holiday', 'provider-coupons', 'provider-offers', 'provider-reviews', 'provider-earnings', 'provider-chat') ? 'active' : '' }}">
@@ -57,7 +57,7 @@
                             <a href="{{url('login')}}">Login</a>
                         </li>
                     @else
-                        <li class="has-submenu {{ Request::is('car-rent', 'favorite-cars', 'car-management', 'payment-history') ? 'active' : '' }}">
+                        {{-- <li class="has-submenu {{ Request::is('car-rent', 'favorite-cars', 'car-management', 'payment-history') ? 'active' : '' }}">
                             <a href="#">Car Services <i class="fas fa-chevron-down"></i></a>
                             <ul class="submenu">
                                 <li class="{{ Request::is('car-rent') ? 'active' : '' }}"><a href="{{ route('cars.available') }}">Booking Cars</a></li>
@@ -65,7 +65,7 @@
                                 <li class="{{ Request::is('car-management') ? 'active' : '' }}"><a href="{{url('car-management')}}">Car Management</a></li>
                                 <li class="{{ Request::is('payment-history') ? 'active' : '' }}"><a href="{{url('payment-history')}}">Payment History</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="login-link">
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
