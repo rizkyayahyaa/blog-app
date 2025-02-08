@@ -5,10 +5,13 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LandingpageController;
 
 
 Route::get('/', [UserController::class, 'login'])->name('login');
 Route::get('/register', [UserController::class, 'register'])->name('register');
+Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage');
+
 
 Route::prefix('admin')->group(function () {
 
