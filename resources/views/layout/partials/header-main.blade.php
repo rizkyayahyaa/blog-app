@@ -64,10 +64,10 @@
             <ul class="nav header-navbar-rht">
                 @if(!Auth::check())
                     <li class="nav-item">
-                        <a class="nav-link header-reg" href="{{url('user-signup')}}">Register</a>
+                        <a class="nav-link header-reg" href="{{url('/register')}}">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link header-login" href="{{url('login')}}"><i class="fa-regular fa-circle-user me-2"></i>Login</a>
+                        <a class="nav-link header-login" href="{{url('/')}}"><i class="fa-regular fa-circle-user me-2"></i>Login</a>
                     </li>
                 @else
                     <li class="nav-item">
