@@ -78,27 +78,27 @@ body::before {
                                 </li>
                                 <li>
                                     <a href="customer-booking.html">
-                                        <i class="feather-smartphone"></i> <span>Bookings</span>
+                                        <i class="feather-smartphone"></i> <span>My Posts</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="customer-favourite.html" class="active">
-                                        <i class="feather-heart"></i> <span>Favorites</span>
+                                    <a href="customer-favourite.html">
+                                        <i class="feather-plus"></i> <span>Create Posts</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="customer-wallet.html">
-                                        <i class="feather-credit-card"></i> <span>Wallet</span>
+                                        <i class="fa-solid fa-comments"></i> <span>Comments</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="customer-reviews.html">
-                                        <i class="feather-star"></i> <span>Reviews</span>
+                                        <i class="fa-solid fa-tags"></i> <span>All Categories</span>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="customer-chat.html">
-                                        <i class="feather-message-circle"></i> <span>Chat</span>
+                                        <i class="feather-message-circle"></i> <span>Direct Messages</span>
                                     </a>
                                 </li>
                                 <li>

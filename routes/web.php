@@ -9,8 +9,13 @@ use App\Http\Controllers\LandingpageController;
 
 
 Route::get('/', [UserController::class, 'login'])->name('login');
+Route::post('/login', [UserController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/register', [UserController::class, 'register'])->name('register');
-Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage');
+Route::post('/register', [UserController::class, 'registerStore'])->name('register.store');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+
+Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');;
 
 
 Route::prefix('admin')->group(function () {

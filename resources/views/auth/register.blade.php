@@ -13,7 +13,7 @@
                     </div>
 
                     <!-- Sign Up Form -->
-                    <form method="POST" action="#">
+                    <form action="{{ route('register.store') }}" method="POST">
                         @csrf
                         <div class="log-form">
                             <div class="form-group mb-3">
