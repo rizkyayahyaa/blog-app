@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +23,13 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('index')->with('success', 'Login successful!');
+
+            // Cek peran pengguna dan arahkan ke halaman yang sesuai
+            if (Auth::user()->role == 'admin') {
+                return redirect()->route('index_admin')->with('success', 'Login successful!');
+            }
+
+            return redirect()->route('landingpage')->with('success', 'Login successful!');
         }
 
         return back()->withErrors([
@@ -49,6 +54,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'user', // Set default role as 'user'
         ]);
 
         Auth::login($user);
@@ -66,8 +72,19 @@ class UserController extends Controller
 
     public function index()
     {
+        // Jika role adalah 'admin', arahkan ke halaman admin
+        if (Auth::user()->role == 'admin') {
+            return redirect()->route('index_admin');
+        }
+
+        return view('index'); // Tampilan untuk user biasa
+    }
+
+    public function indexAdmin()
+    {
+        // Tampilan untuk admin
         $users = User::all();
-        return view('admin.users.index', compact('users'));
+        return view('admin.index_admin', compact('users'));
     }
 
     public function create()

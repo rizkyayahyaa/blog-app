@@ -15,12 +15,12 @@ Route::post('/register', [UserController::class, 'registerStore'])->name('regist
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 
-Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');;
+Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');
 
 
 Route::prefix('admin')->group(function () {
 
-    Route::get('/admin', [AdminController::class, 'index'])->name('index_admin');
+    Route::get('/admin', [AdminController::class, 'index'])->name('index_admin')->middleware('auth');
 
     Route::get('posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');

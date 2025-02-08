@@ -8,7 +8,7 @@
             <div class="col-md-6 col-lg-4 mx-auto">
                 <div class="login-wrap">
                     <div class="login-header text-center">
-                        <img src="{{ URL::asset('/assets/img/best.png')}}" alt="Instagram Logo" class="mb-4" style="width: 150px;">
+                        <img src="{{ URL::asset('/assets/img/best.png')}}" alt="Logo" class="mb-4" style="width: 150px;">
                         <h3>Create New Account</h3>
                     </div>
 
@@ -16,26 +16,41 @@
                     <form action="{{ route('register.store') }}" method="POST">
                         @csrf
                         <div class="log-form">
+                            <!-- Name Field -->
                             <div class="form-group mb-3">
                                 <input type="text" name="name" class="form-control" placeholder="Full Name" value="{{ old('name') }}" required autofocus>
                                 @error('name')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <!-- Email Field -->
                             <div class="form-group mb-3">
-                                <input type="email" name="email" class="form-control" placeholder="Phone number, username, or email" value="{{ old('email') }}" required>
+                                <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required>
                                 @error('email')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <!-- Password Field -->
                             <div class="form-group mb-3">
                                 <input type="password" name="password" class="form-control" placeholder="Password" required>
                                 @error('password')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <!-- Confirm Password Field -->
                             <div class="form-group mb-3">
                                 <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+                            </div>
+                            <!-- Role Selection -->
+                            <div class="form-group mb-3">
+                                <select name="role" class="form-control" required>
+                                    <option value="">Select Role</option>
+                                    <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                    <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                                </select>
+                                @error('role')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
 
