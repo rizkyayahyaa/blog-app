@@ -66,8 +66,8 @@ body::before {
                             <div class="settings-img">
                                 <img src="assets/img/profiles/avatar-02.jpg" alt="user">
                             </div>
-                            <h6>John Smith</h6>
-                            <p>Member Since Sep 2021</p>
+                            <h6>{{ Auth::user()->name }}</h6>
+                            <p>Member Since {{ Auth::user()->created_at->format('M Y') }}</p>
                         </div>
                         <div class="settings-menu">
                             <ul>
@@ -107,7 +107,10 @@ body::before {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="index.html">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="feather-log-out"></i> <span>Logout</span>
                                     </a>
                                 </li>
