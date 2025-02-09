@@ -18,7 +18,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');
 Route::get('/admin', [AdminController::class, 'index'])->name('index_admin')->middleware('auth');;
 
-Route::group(['middleware' => ['auth', 'cekrole:admin']], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get('posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');

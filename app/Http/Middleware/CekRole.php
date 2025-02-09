@@ -13,12 +13,8 @@ class CekRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, ... $roles): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        if (in_array($request-user()-role,$roles)){
-
-            return $next($request);
-        }
-       return redirect('/');
+        return $next($request);
     }
 }

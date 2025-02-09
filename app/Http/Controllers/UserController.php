@@ -72,20 +72,11 @@ class UserController extends Controller
 
     public function index()
     {
-        // Jika role adalah 'admin', arahkan ke halaman admin
-        if (Auth::user()->role == 'admin') {
-            return redirect()->route('index_admin');
-        }
-
-        return view('index'); // Tampilan untuk user biasa
-    }
-
-    public function indexAdmin()
-    {
-        // Tampilan untuk admin
         $users = User::all();
-        return view('admin.index_admin', compact('users'));
+
+        return view('admin.users.index', compact('users'));
     }
+
 
     public function create()
     {
