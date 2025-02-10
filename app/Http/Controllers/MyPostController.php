@@ -8,21 +8,18 @@ use Illuminate\Support\Facades\Auth;
 
 class MyPostController extends Controller
 {
-    // Menampilkan semua post milik pengguna yang sedang login
     public function index()
     {
-        $posts = Auth::user()->posts; // Ambil post berdasarkan user yang login
+        $posts = Auth::user()->posts; 
         return view('mypost.mypost', compact('posts'));
     }
 
-    // Mengedit post milik pengguna yang login
     public function edit($id)
     {
         $post = Post::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
         return view('mypost.edit', compact('post'));
     }
 
-    // Update post milik pengguna yang login
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -37,12 +34,11 @@ class MyPostController extends Controller
         $post->content = $request->content;
 
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
+
             if ($post->image) {
                 \Storage::delete('public/' . $post->image);
             }
 
-            // Simpan gambar baru
             $imagePath = $request->file('image')->store('posts', 'public');
             $post->image = $imagePath;
         }
@@ -52,12 +48,10 @@ class MyPostController extends Controller
         return redirect()->route('mypost.index')->with('success', 'Post updated successfully!');
     }
 
-    // Hapus post milik pengguna yang login
     public function destroy($id)
     {
         $post = Post::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
 
-        // Hapus gambar jika ada
         if ($post->image) {
             \Storage::delete('public/' . $post->image);
         }

@@ -175,7 +175,6 @@ body::before {
             <div class="row">
 
                 <div class="col-md-4 col-lg-3 theiaStickySidebar">
-
                     <!-- Settings Menu -->
                     <div class="settings-widget">
                         <div class="settings-header">
@@ -239,8 +238,19 @@ body::before {
                     <!-- /Settings Menu -->
                 </div>
 
-                <div class="col-md-8 col-lg-9">
 
+                <div class="col-md-8 col-lg-9">
+                    <form action="{{ route('user.posts.index') }}" method="GET">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Search posts..." value="{{ request()->get('search') }}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="feather-search"></i> Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
                     <!-- Sort -->
                     <div class="row align-items-center">
 
@@ -387,25 +397,5 @@ body::before {
 <script src="assets/js/script.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-
-@if(session('success'))
-        Swal.fire({
-            title: 'Success!',
-            text: '{{ session('success') }}',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then(() => {
-            window.location.href = "{{ route('user.posts.index') }}";
-        });
-    @endif
-
-    $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-
-</script>
-
 
 @endsection
