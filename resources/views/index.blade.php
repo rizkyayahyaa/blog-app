@@ -49,6 +49,62 @@ body::before {
     background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
 }
+
+.service-content {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.post-image img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.like-share button {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-like i {
+    color: #e74c3c;
+}
+
+.comments a {
+    font-size: 14px;
+    color: #3498db;
+}
+
+.serv-info {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.btn-book {
+    background-color: #2980b9;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-book:hover {
+    background-color: #1abc9c;
+}
+
+
 </style>
 
 <!-- Main Wrapper -->
@@ -86,14 +142,14 @@ body::before {
                                         <i class="feather-plus"></i> <span>Create Posts</span>
                                     </a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="customer-wallet.html">
                                         <i class="fa-solid fa-comments"></i> <span>Comments</span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="customer-reviews.html">
-                                        <i class="fa-solid fa-tags"></i> <span>All Categories</span>
+                                        <i class="fa-solid fa-users"></i> <span>All Post</span>
                                     </a>
                                 </li>
                                 <li>
@@ -151,7 +207,6 @@ body::before {
                     <!-- /Sort -->
 
                     <div class="row">
-
                         <!-- Service List -->
                         <div class="col-xl-4 col-md-6">
                             <div class="service-widget servicecontent">
@@ -173,16 +228,39 @@ body::before {
                                         <a href="service-details.html">Car Repair Services</a>
                                     </h3>
                                     <p><i class="feather-map-pin"></i>Maryland City, USA<span class="rate"><i class="fas fa-star filled"></i>4.9</span></p>
-                                    <div class="serv-info">
-                                        <h6>$50.00</h6>
-                                        <a href="booking.html" class="btn btn-book">Book Now</a>
+
+                                    <!-- Post Actions -->
+                                    <div class="post-actions">
+                                        <div class="like-share">
+                                            <button class="btn-like">
+                                                <i class="fas fa-heart"></i> Like
+                                            </button>
+                                            <button class="btn-share">
+                                                <i class="fas fa-share"></i> Share
+                                            </button>
+                                        </div>
+                                        <div class="comments">
+                                            <a href="comments.html">View Comments (3)</a>
+                                        </div>
                                     </div>
+                                </div>
+
+                                <!-- Input Comment Section -->
+                                <div class="comment-input">
+                                    <form action="#" method="POST">
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="2" placeholder="Write your comment here..."></textarea>
+                                            <br>
+                                            <button type="submit" class="btn btn-primary btn-sm">Post Comment</button>
+                                        </div>
+
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         <!-- /Service List -->
-
                     </div>
+
 
                     <!-- Pagination -->
                     <div class="row">

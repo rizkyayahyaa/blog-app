@@ -30,7 +30,8 @@
                     <input type="file" class="form-control" id="image" name="image">
                 </div>
 
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-between">
+                    <a href="#" class="btn btn-danger">Cancel</a>
                     <button type="submit" class="btn btn-primary">Create Post</button>
                 </div>
             </form>
