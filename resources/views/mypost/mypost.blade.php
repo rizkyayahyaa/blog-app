@@ -15,17 +15,17 @@
                                     <div class="card shadow-sm border-0 h-100">
                                         <div class="position-relative">
                                             <img class="card-img-top" src="{{ asset('storage/' . $post->image) }}" alt="Post Image" style="height: 200px; object-fit: cover;">
-                                            <div class="position-absolute top-0 start-0 bg-primary text-white px-4 py-1 small">
+                                            {{-- <div class="position-absolute top-0 start-0 bg-primary text-white px-4 py-1 small">
                                                 {{ $post->category }}
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div class="card-body d-flex flex-column">
                                             <h5 class="card-title">{{ $post->title }}</h5>
                                             <p class="card-text flex-grow-1">{{ Str::limit($post->content, 100) }}</p>
-                                            <a href="#" class="btn btn-outline-primary mt-auto">Read More</a>
+                                            {{-- <a href="#" class="btn btn-outline-primary mt-auto">Read More</a> --}}
 
                                             <div class="mt-3">
-                                                <button class="btn btn-warning btn-sm">Edit</button>
+                                                <a href="{{ route('mypost.edit', $post->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                                 <button class="btn btn-danger btn-sm">Delete</button>
                                             </div>
                                         </div>

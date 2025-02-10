@@ -22,7 +22,10 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');
 Route::get('/dashboard', [PostUserController::class, 'index'])->name('dashboard');
 Route::get('/customer-chat', [CustomerChatController::class, 'index'])->name('customer.chat');
-Route::get('/mypost', [MyPostController::class, 'index'])->name('mypost.mypost');
+
+Route::get('/mypost', [MyPostController::class, 'index'])->name('mypost.index');
+Route::get('/mypost/{id}/edit', [MyPostController::class, 'edit'])->name('mypost.edit');
+Route::put('/mypost/{id}', [MyPostController::class, 'update'])->name('mypost.update');
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
