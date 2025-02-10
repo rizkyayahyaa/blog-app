@@ -23,9 +23,12 @@ Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage
 Route::get('/dashboard', [PostUserController::class, 'index'])->name('dashboard');
 Route::get('/customer-chat', [CustomerChatController::class, 'index'])->name('customer.chat');
 
-Route::get('/mypost', [MyPostController::class, 'index'])->name('mypost.index');
+Route::get('/mypost', [MyPostController::class, 'index'])->name('mypost.mypost');
 Route::get('/mypost/{id}/edit', [MyPostController::class, 'edit'])->name('mypost.edit');
 Route::put('/mypost/{id}', [MyPostController::class, 'update'])->name('mypost.update');
+Route::delete('/mypost/{id}', [MyPostController::class, 'destroy'])->name('mypost.destroy');
+
+Route::get('/profile', [UserController::class, 'show'])->name('user.profile');
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {

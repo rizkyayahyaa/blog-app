@@ -14,10 +14,12 @@
                                 <div class="col-lg-4 col-md-6 mb-4">
                                     <div class="card shadow-sm border-0 h-100">
                                         <div class="position-relative">
-                                            <img class="card-img-top" src="{{ asset('storage/' . $post->image) }}" alt="Post Image" style="height: 200px; object-fit: cover;">
-                                            {{-- <div class="position-absolute top-0 start-0 bg-primary text-white px-4 py-1 small">
-                                                {{ $post->category }}
-                                            </div> --}}
+                                            @if($post->image)
+                                            <img class="card-img-top" src="{{ asset('storage/' . $post->image) }}" alt="Post Image">
+                                        @else
+                                            <img class="card-img-top" src="{{ asset('images/default.jpg') }}" alt="Default Image">
+                                        @endif
+
                                         </div>
                                         <div class="card-body d-flex flex-column">
                                             <h5 class="card-title">{{ $post->title }}</h5>
@@ -26,8 +28,14 @@
 
                                             <div class="mt-3">
                                                 <a href="{{ route('mypost.edit', $post->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                                <button class="btn btn-danger btn-sm">Delete</button>
+
+                                                <form action="{{ route('mypost.destroy', $post->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>

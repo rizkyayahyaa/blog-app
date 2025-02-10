@@ -133,8 +133,11 @@ body::before {
                     <div class="settings-widget">
                         <div class="settings-header">
                             <div class="settings-img">
-                                <img src="{{ Auth::user()->image }}" alt="user">
-                            </div>
+                            @if(Auth::user()->image)
+                                <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="Profile Image" class="img-fluid">
+                            @else
+                                <img src="{{ asset('assets/img/default-avatar.png') }}" alt="Default Avatar" class="img-fluid">
+                            @endif                           </div>
                             <h6>{{ Auth::user()->name }}</h6>
                             <p>Member Since {{ Auth::user()->created_at->format('M Y') }}</p>
                         </div>

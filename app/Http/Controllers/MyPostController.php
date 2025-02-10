@@ -41,5 +41,20 @@ class MyPostController extends Controller
         return redirect()->route('mypost.index')->with('success', 'Post updated successfully!');
     }
 
+    public function destroy($id)
+{
+    $post = Post::findOrFail($id);
+
+    // Hapus gambar jika ada
+    if ($post->image) {
+        \Storage::delete('public/' . $post->image);
+    }
+
+    $post->delete();
+
+    return redirect()->route('mypost.index')->with('success', 'Post deleted successfully!');
+}
+
+
 
 }
