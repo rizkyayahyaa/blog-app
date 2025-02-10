@@ -294,6 +294,9 @@ body::before {
                                         <h3 class="title">
                                             <a href="#">{{ $post->title }}</a>
                                         </h3>
+                                        <span class="user-name">
+                                           @ {{ $post->user->name }}
+                                        </span>
                                         <p>{{ Str::limit($post->content, 100) }}</p>
 
                                         <!-- Post Actions -->
