@@ -9,8 +9,7 @@ use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\PostUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerChatController;
-
-
+use App\Http\Controllers\MyPostController;
 
 
 Route::get('/', [UserController::class, 'login'])->name('login');
@@ -24,6 +23,9 @@ Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage
 Route::get('/dashboard', [PostUserController::class, 'index'])->name('dashboard');
 Route::get('/customer-chat', [CustomerChatController::class, 'index'])->name('customer.chat');
 
+Route::get('/mypost', [MyPostController::class, 'index'])->name('mypost.index');
+Route::get('/mypost/{id}/edit', [MyPostController::class, 'edit'])->name('mypost.edit');
+Route::put('/mypost/{id}', [MyPostController::class, 'update'])->name('mypost.update');
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
