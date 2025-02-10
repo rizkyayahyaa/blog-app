@@ -191,7 +191,7 @@ body::before {
                             <ul>
                                 <li>
                                     <a href="{{ route('dashboard') }}">
-                                        <i class="feather-grid"></i> <span>Home</span>
+                                        <i class="fa-solid fa-users"></i> <span>All Post</span>
                                     </a>
                                 </li>
                                 <li>
@@ -211,7 +211,7 @@ body::before {
                                 </li> --}}
                                 <li>
                                     <a href="customer-reviews.html">
-                                        <i class="fa-solid fa-users"></i> <span>All Post</span>
+                                        <i class="feather-archive"></i> <span>Archive</span>
                                     </a>
                                 </li>
                                 <li>
