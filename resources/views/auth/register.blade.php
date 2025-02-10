@@ -13,7 +13,7 @@
                     </div>
 
                     <!-- Sign Up Form -->
-                    <form action="{{ route('register.store') }}" method="POST">
+                    <form action="{{ route('register.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="log-form">
                             <!-- Name Field -->
@@ -49,6 +49,13 @@
                                     <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                                 </select>
                                 @error('role')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="image">Profile Picture</label>
+                                <input type="file" name="image" class="form-control" accept="image/*">
+                                @error('image')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>

@@ -120,7 +120,7 @@ body::before {
                     <div class="settings-widget">
                         <div class="settings-header">
                             <div class="settings-img">
-                                <img src="assets/img/profiles/avatar-02.jpg" alt="user">
+                                <img src="{{ Auth::user()->image }}" alt="user">
                             </div>
                             <h6>{{ Auth::user()->name }}</h6>
                             <p>Member Since {{ Auth::user()->created_at->format('M Y') }}</p>

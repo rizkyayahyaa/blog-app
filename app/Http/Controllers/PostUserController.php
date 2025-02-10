@@ -12,7 +12,7 @@ class PostUserController extends Controller
     public function index()
     {
         $posts = Post::with('user')->latest()->get();
-        return view('index', ['posts' => $posts]); // Explicitly passing posts
+        return view('index', ['posts' => $posts]);
     }
 
     public function create()
