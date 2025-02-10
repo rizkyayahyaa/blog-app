@@ -20,6 +20,7 @@
                                     <th>#</th>
                                     <th>Title</th>
                                     <th>Content</th>
+                                    <th>Post Image</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -28,6 +29,13 @@
                                     <td>{{ $post->id }}</td>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->content }}</td>
+                                    <td>
+                                        @if ($post->image)
+                                            <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" style="max-width: 100px; height: auto;">
+                                        @else
+                                            <span>No Image</span>
+                                        @endif
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>

@@ -207,58 +207,68 @@ body::before {
                     <!-- /Sort -->
 
                     <div class="row">
-                        <!-- Service List -->
-                        <div class="col-xl-4 col-md-6">
-                            <div class="service-widget servicecontent">
-                                <div class="service-img">
-                                    <a href="service-details.html">
-                                        <img class="img-fluid serv-img" alt="Service Image" src="assets/img/services/service-04.jpg">
-                                    </a>
-                                    <div class="fav-item">
-                                        <a href="javascript:void(0)" class="fav-icon selected">
-                                            <i class="feather-heart"></i>
-                                        </a>
-                                    </div>
-                                    <div class="item-info">
-                                        <a href="providers.html"><span class="item-img"><img src="assets/img/profiles/avatar-01.jpg" class="avatar" alt=""></span></a>
-                                    </div>
-                                </div>
-                                <div class="service-content">
-                                    <h3 class="title">
-                                        <a href="service-details.html">Car Repair Services</a>
-                                    </h3>
-                                    <p><i class="feather-map-pin"></i>Maryland City, USA<span class="rate"><i class="fas fa-star filled"></i>4.9</span></p>
-
-                                    <!-- Post Actions -->
-                                    <div class="post-actions">
-                                        <div class="like-share">
-                                            <button class="btn-like">
-                                                <i class="fas fa-heart"></i> Like
-                                            </button>
-                                            <button class="btn-share">
-                                                <i class="fas fa-share"></i> Share
-                                            </button>
+                        @if(isset($posts) && $posts->count() > 0)
+                            <!-- Service List -->
+                            @foreach($posts as $post)
+                            <div class="col-xl-4 col-md-6">
+                                <div class="service-widget servicecontent">
+                                    <div class="service-img">
+                                        @if($post->image)
+                                            <img class="img-fluid serv-img" alt="Post Image" src="{{ asset('storage/' . $post->image) }}">
+                                        @endif
+                                        <div class="fav-item">
+                                            <a href="javascript:void(0)" class="fav-icon">
+                                                <i class="feather-heart"></i>
+                                            </a>
                                         </div>
-                                        <div class="comments">
-                                            <a href="comments.html">View Comments (3)</a>
+                                        <div class="item-info">
+                                            <a href="#"><span class="item-img">
+                                                <img src="{{ asset('assets/img/profiles/avatar-01.jpg') }}" class="avatar" alt="">
+                                            </span></a>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="service-content">
+                                        <h3 class="title">
+                                            <a href="#">{{ $post->title }}</a>
+                                        </h3>
+                                        <p>{{ $post->content }}</p>
 
-                                <!-- Input Comment Section -->
-                                <div class="comment-input">
-                                    <form action="#" method="POST">
-                                        <div class="form-group">
-                                            <textarea class="form-control" rows="2" placeholder="Write your comment here..."></textarea>
-                                            <br>
-                                            <button type="submit" class="btn btn-primary btn-sm">Post Comment</button>
+                                        <!-- Post Actions -->
+                                        <div class="post-actions">
+                                            <div class="like-share">
+                                                <button class="btn-like">
+                                                    <i class="fas fa-heart"></i> Like
+                                                </button>
+                                                <button class="btn-share">
+                                                    <i class="fas fa-share"></i> Share
+                                                </button>
+                                            </div>
+                                            <div class="comments">
+                                                <a href="#">View Comments (3)</a>
+                                            </div>
                                         </div>
+                                    </div>
 
-                                    </form>
+                                    <!-- Input Comment Section -->
+                                    <div class="comment-input">
+                                        <form action="#" method="POST">
+                                            <div class="form-group">
+                                                <textarea class="form-control" rows="2" placeholder="Write your comment here..."></textarea>
+                                                <br>
+                                                <button type="submit" class="btn btn-primary btn-sm">Post Comment</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- /Service List -->
+                            @endforeach
+                        @else
+                            <div class="col-12">
+                                <div class="alert alert-info text-center">
+                                    No posts available. <a href="{{ route('user.posts.create') }}" class="alert-link">Create your first post!</a>
+                                </div>
+                            </div>
+                        @endif
                     </div>
 
 

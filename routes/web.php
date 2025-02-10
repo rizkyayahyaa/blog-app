@@ -19,8 +19,11 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');
 
-Route::get('/user/posts/create', [PostUserController::class, 'create'])->name('user.posts.create');
-Route::post('/user/posts/store', [PostUserController::class, 'store'])->name('user.posts.store');
+Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
+    Route::get('/posts', [PostUserController::class, 'index'])->name('user.posts.index');
+    Route::get('/posts/create', [PostUserController::class, 'create'])->name('user.posts.create');
+    Route::post('/posts', [PostUserController::class, 'store'])->name('user.posts.store');
+});
 
 Route::get('/admin', [AdminController::class, 'index'])->name('index_admin')->middleware('auth');;
 

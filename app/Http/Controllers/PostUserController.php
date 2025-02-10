@@ -5,37 +5,41 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostUserController extends Controller
 {
-    // Menampilkan form create post
+    public function index()
+    {
+        $posts = Post::with('user')->latest()->get();
+        return view('index', ['posts' => $posts]); // Explicitly passing posts
+    }
+
     public function create()
     {
         return view('user.create');
     }
 
-    // Menyimpan post baru
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
+        $validatedData = $request->validate([
+            'title' => 'required|string',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
         $post = new Post();
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->user_id = Auth::id(); // Simpan ID user yang sedang login
+        $post->title = $validatedData['title'];
+        $post->content = $validatedData['content'];
+        $post->user_id = Auth::id();
 
-        // Upload image jika ada
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('post_images', 'public');
+            $imagePath = $request->file('image')->store('posts', 'public');
             $post->image = $imagePath;
         }
 
         $post->save();
 
-        return redirect()->route('user.posts.create')->with('success', 'Post berhasil dibuat!');
+        return redirect()->route('user.posts.index')->with('success', 'Post created successfully!');
     }
 }
