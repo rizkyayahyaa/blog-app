@@ -10,8 +10,8 @@ class MyPostController extends Controller
 {
     public function index()
     {
-        $posts = Auth::user()->posts; 
-        return view('mypost.mypost', compact('posts'));
+        $posts = Auth::user()->posts;
+        return view('mypost.index', compact('posts'));
     }
 
     public function edit($id)

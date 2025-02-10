@@ -10,6 +10,8 @@ use App\Http\Controllers\PostUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerChatController;
 use App\Http\Controllers\MyPostController;
+use App\Http\Controllers\IndexController;
+
 
 
 Route::get('/', [UserController::class, 'login'])->name('login');
@@ -22,9 +24,11 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');
 Route::get('/dashboard', [PostUserController::class, 'index'])->name('dashboard');
 Route::get('/customer-chat', [CustomerChatController::class, 'index'])->name('customer.chat');
+Route::get('/mypost/mypost', [IndexController::class, 'index'])->name('mypost.mypost'); // Changed from mypost.mypost
+
 
 Route::middleware('auth')->group(function () {
-    Route::get('/mypost', [MyPostController::class, 'index'])->name('mypost.mypost');
+    Route::get('/mypost', [MyPostController::class, 'index'])->name('mypost.index'); // Changed from mypost.mypost
     Route::get('/mypost/{id}/edit', [MyPostController::class, 'edit'])->name('mypost.edit');
     Route::put('/mypost/{id}', [MyPostController::class, 'update'])->name('mypost.update');
     Route::delete('/mypost/{id}', [MyPostController::class, 'destroy'])->name('mypost.destroy');

@@ -7,7 +7,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    <div class="col-12 mb-3">
+                        <a href="{{ route('dashboard') }}" class="btn btn-primary rounded-pill">Back to Dashboard</a>
+                    </div>
                     <div class="row">
+
                         @if(isset($posts) && $posts->count() > 0)
                             @foreach($posts as $post)
                                 <div class="col-lg-3 col-md-3 mb-3">
@@ -22,13 +26,14 @@
                                         <div class="card-body d-flex flex-column">
                                             <h5 class="card-title text-truncate" style="max-width: 100%;">{{ $post->title }}</h5>
                                             <p class="card-text flex-grow-1 text-muted">{{ Str::limit($post->content, 120) }}</p>
+
                                             <div class="mt-3 d-flex justify-content-between">
-                                                <a href="{{ route('mypost.edit', $post->id) }}" class="btn btn-edit btn-sm rounded-pill">Edit</a>
+                                                <a href="{{ route('mypost.edit', $post->id) }}" class="btn btn-edit btn rounded-pill">Edit</a>
 
                                                 <form action="{{ route('mypost.destroy', $post->id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-delete btn-sm rounded-pill">Delete</button>
+                                                    <button type="submit" class="btn btn-delete btn rounded-pill">Delete</button>
                                                 </form>
                                             </div>
                                         </div>
