@@ -31,11 +31,11 @@
 
                 <li>
                     <a class="{{ Request::is('admin/posts*') ? 'active' : '' }}"
-                        href="{{ url('admin/posts') }}"><i class="fa-solid fa-pen"></i> <span>Manajemen Postingan</span></a>
+                        href="{{ url('/posts') }}"><i class="fa-solid fa-pen"></i> <span>Manajemen Postingan</span></a>
                 </li>
                 <li>
                     <a class="{{ Request::is('admin/comments*') ? 'active' : '' }}"
-                        href="{{ url('admin/comments') }}"><i class="fa-solid fa-comments"></i> <span>Manajemen Komentar</span></a>
+                        href="{{ url('/comments') }}"><i class="fa-solid fa-comments"></i> <span>Manajemen Komentar</span></a>
                 </li>
                 <li>
                     <a class="{{ Request::is('admin/reports') ? 'active' : '' }}"
@@ -57,8 +57,12 @@
                         href="{{ url('admin/admin') }}"><i class="fa-solid fa-user"></i> <span>Profile</span></a>
                 </li>
                 <li>
-                    <a class="{{ Request::is('admin/signin') ? 'active' : '' }}"
-                        href="{{ url('admin/signin') }}"><i class="fe fe-log-out"></i> <span>Logout</span></a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fe fe-log-out"></i> <span>Logout</span>
+                    </a>
                 </li>
             </ul>
         </div>

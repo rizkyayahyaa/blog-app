@@ -11,5 +11,6 @@ class AdminController extends Controller
         // Kamu bisa menambahkan data jika diperlukan
         return view('admin.index_admin');
     }
+
 }
 

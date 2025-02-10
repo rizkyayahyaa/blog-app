@@ -6,16 +6,35 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LandingpageController;
+use App\Http\Controllers\PostUserController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CustomerChatController;
+
+
 
 
 Route::get('/', [UserController::class, 'login'])->name('login');
+Route::post('/login', [UserController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/register', [UserController::class, 'register'])->name('register');
-Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage');
+Route::post('/register', [UserController::class, 'registerStore'])->name('register.store');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 
-Route::prefix('admin')->group(function () {
+Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');
+Route::get('/dashboard', [PostUserController::class, 'index'])->name('dashboard');
+Route::get('/customer-chat', [CustomerChatController::class, 'index'])->name('customer.chat');
 
-    Route::get('/admin', [AdminController::class, 'index'])->name('index_admin');
+
+
+Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
+    Route::get('/posts', [PostUserController::class, 'index'])->name('user.posts.index');
+    Route::get('/posts/create', [PostUserController::class, 'create'])->name('user.posts.create');
+    Route::post('/posts', [PostUserController::class, 'store'])->name('user.posts.store');
+});
+
+Route::get('/admin', [AdminController::class, 'index'])->name('index_admin')->middleware('auth');;
+
+Route::group(['middleware' => ['auth']], function () {
 
     Route::get('posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');

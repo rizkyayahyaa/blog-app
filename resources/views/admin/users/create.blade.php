@@ -10,7 +10,7 @@
             <div class="col-lg-8 offset-lg-2">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('admin.users.store') }}" method="POST">
+                        <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="mb-3">
@@ -26,6 +26,10 @@
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Profile Image</label>
+                                <input type="file" class="form-control" id="image" name="image">
                             </div>
 
                             <div class="text-end">

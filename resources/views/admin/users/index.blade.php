@@ -14,6 +14,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -23,6 +24,13 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
+                            <td>
+                                @if($user->image)
+                                    <img src="{{ asset('storage/' . $user->image) }}" alt="Profile Image" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
+                                @else
+                                    <img src="{{ asset('assets/img/profiles/avatar-default.jpg') }}" alt="Default Profile" width="50" height="50" style="object-fit: cover; border-radius: 50%;">
+                                @endif
+                            </td>
                             <td>
                                 <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning">
                                     <i class="fas fa-edit"></i>

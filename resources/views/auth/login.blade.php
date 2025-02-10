@@ -12,7 +12,7 @@
                     </div>
 
                     <!-- Login Form -->
-                    <form action="{{ route('login') }}" method="POST">
+                    <form action="{{ route('login.authenticate') }}" method="POST">
                         @csrf
                         <div class="log-form">
                             <div class="form-group mb-3">

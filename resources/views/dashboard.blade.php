@@ -28,19 +28,6 @@
 
 @section('content')
 
-<script>
-    @if(session('success'))
-        Swal.fire({
-            title: 'Success!',
-            text: '{{ session('success') }}',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then(() => {
-            window.location.href = "{{ route('user.posts.index') }}";
-        });
-    @endif
-</script>
-
 <!-- Custom Style for Background -->
 <style>
 body {
@@ -141,7 +128,7 @@ body::before {
                         <div class="settings-menu">
                             <ul>
                                 <li>
-                                    <a href="{{ route('dashboard') }}">
+                                    <a href="customer-dashboard.html">
                                         <i class="feather-grid"></i> <span>Home</span>
                                     </a>
                                 </li>
@@ -166,7 +153,7 @@ body::before {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('customer.chat') }}">
+                                    <a href="customer-chat.html">
                                         <i class="feather-message-circle"></i> <span>Direct Messages</span>
                                     </a>
                                 </li>
@@ -268,7 +255,7 @@ body::before {
                                             <div class="form-group">
                                                 <textarea class="form-control" rows="2" placeholder="Write your comment here..."></textarea>
                                                 <br>
-                                                <button type="submit" class="btn btn-primary btn-sm">Post Comment</button>
+                                                <button type="submit" class="btn btn-primary btn-sm" style="padding: 2px 8px; font-size: 12px;">Post Comment</button>
                                             </div>
                                         </form>
                                     </div>
@@ -333,6 +320,17 @@ body::before {
 <script src="assets/js/script.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script>
+    @if(session('success'))
+        Swal.fire({
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            window.location.href = "{{ route('user.posts.index') }}";
+        });
+    @endif
+</script>
 
 @endsection
