@@ -133,7 +133,7 @@ body::before {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="customer-booking.html">
+                                    <a href="{{ route('mypost') }}">
                                         <i class="feather-smartphone"></i> <span>My Posts</span>
                                     </a>
                                 </li>

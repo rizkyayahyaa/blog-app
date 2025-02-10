@@ -9,8 +9,7 @@ use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\PostUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerChatController;
-
-
+use App\Http\Controllers\MyPostController;
 
 
 Route::get('/', [UserController::class, 'login'])->name('login');
@@ -23,7 +22,7 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');
 Route::get('/dashboard', [PostUserController::class, 'index'])->name('dashboard');
 Route::get('/customer-chat', [CustomerChatController::class, 'index'])->name('customer.chat');
-
+Route::get('/mypost', [MyPostController::class, 'index'])->name('mypost.mypost');
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
