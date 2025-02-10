@@ -44,13 +44,14 @@
 <!-- Custom Style for Background -->
 <style>
 body {
-    position: relative;
     background-image: url('{{ asset('assets/img/best.png') }}');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3); /* Mengurangi kegelapan */
+    color: #fff;
 }
+
 
 body::before {
     content: "";
@@ -89,10 +90,27 @@ body::before {
     color: #333;
     font-size: 16px;
     cursor: pointer;
+    transition: color 0.3s;
+}
+
+.like-share button:hover {
+    color: #e74c3c;
 }
 
 .btn-like i {
     color: #e74c3c;
+}
+
+.btn-like:hover i {
+    color: #c0392b;
+}
+
+.btn-share i {
+    color: #3498db;
+}
+
+.btn-share:hover i {
+    color: #2980b9;
 }
 
 .comments a {
@@ -116,6 +134,35 @@ body::before {
 .btn-book:hover {
     background-color: #1abc9c;
 }
+
+.service-widget.card {
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.service-widget.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    border-radius: 5px;
+    background-color: #fff;
+    color: #3498db;
+    padding: 8px 12px;
+    transition: background-color 0.3s;
+}
+
+.pagination .page-link:hover {
+    background-color: #2980b9;
+    color: #fff;
+}
+
 
 
 </style>
@@ -227,10 +274,10 @@ body::before {
                             <!-- Service List -->
                             @foreach($posts as $post)
                             <div class="col-xl-4 col-md-6">
-                                <div class="service-widget servicecontent">
+                                <div class="service-widget servicecontent card">
                                     <div class="service-img">
                                         @if($post->image)
-                                            <img class="img-fluid serv-img" alt="Post Image" src="{{ asset('storage/' . $post->image) }}">
+                                            <img class="img-fluid serv-img card-img-top" alt="Post Image" src="{{ asset('storage/' . $post->image) }}">
                                         @endif
                                         <div class="fav-item">
                                             <a href="javascript:void(0)" class="fav-icon">
@@ -243,16 +290,16 @@ body::before {
                                             </span></a>
                                         </div>
                                     </div>
-                                    <div class="service-content">
+                                    <div class="service-content card-body">
                                         <h3 class="title">
                                             <a href="#">{{ $post->title }}</a>
                                         </h3>
-                                        <p>{{ $post->content }}</p>
+                                        <p>{{ Str::limit($post->content, 100) }}</p>
 
                                         <!-- Post Actions -->
                                         <div class="post-actions">
                                             <div class="like-share">
-                                                <button class="btn-like">
+                                                <button class="btn-like" data-toggle="tooltip" title="Like this post">
                                                     <i class="fas fa-heart"></i> Like
                                                 </button>
                                                 <button class="btn-share">
@@ -266,7 +313,7 @@ body::before {
                                     </div>
 
                                     <!-- Input Comment Section -->
-                                    <div class="comment-input">
+                                    <div class="comment-input card-footer">
                                         <form action="#" method="POST">
                                             <div class="form-group">
                                                 <textarea class="form-control" rows="2" placeholder="Write your comment here..."></textarea>
@@ -277,6 +324,7 @@ body::before {
                                     </div>
                                 </div>
                             </div>
+
                             @endforeach
                         @else
                             <div class="col-12">
@@ -336,6 +384,25 @@ body::before {
 <script src="assets/js/script.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+@if(session('success'))
+        Swal.fire({
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            window.location.href = "{{ route('user.posts.index') }}";
+        });
+    @endif
+
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+
+</script>
 
 
 @endsection

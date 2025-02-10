@@ -7,35 +7,32 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h2 class="text-center mb-4">Latest Blog Posts</h2>
+                    <h2 class="text-center mb-5">Latest Blog Posts</h2>
                     <div class="row">
                         @if(isset($posts) && $posts->count() > 0)
                             @foreach($posts as $post)
                                 <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="card shadow-sm border-0 h-100">
+                                    <div class="card shadow-lg border-0 h-100 transform-hover">
                                         <div class="position-relative">
                                             @if($post->image)
-                                            <img class="card-img-top" src="{{ asset('storage/' . $post->image) }}" alt="Post Image">
-                                        @else
-                                            <img class="card-img-top" src="{{ asset('images/default.jpg') }}" alt="Default Image">
-                                        @endif
-
+                                                <img class="card-img-top" src="{{ asset('storage/' . $post->image) }}" alt="Post Image">
+                                            @else
+                                                <img class="card-img-top" src="{{ asset('images/default.jpg') }}" alt="Default Image">
+                                            @endif
                                         </div>
                                         <div class="card-body d-flex flex-column">
-                                            <h5 class="card-title">{{ $post->title }}</h5>
-                                            <p class="card-text flex-grow-1">{{ Str::limit($post->content, 100) }}</p>
-                                            {{-- <a href="#" class="btn btn-outline-primary mt-auto">Read More</a> --}}
+                                            <h5 class="card-title text-truncate" style="max-width: 100%;">{{ $post->title }}</h5>
+                                            <p class="card-text flex-grow-1 text-muted">{{ Str::limit($post->content, 120) }}</p>
 
-                                            <div class="mt-3">
-                                                <a href="{{ route('mypost.edit', $post->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                            <div class="mt-3 d-flex justify-content-between">
+                                                <a href="{{ route('mypost.edit', $post->id) }}" class="btn btn-edit btn-sm rounded-pill">Edit</a>
 
                                                 <form action="{{ route('mypost.destroy', $post->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this post?');">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                    <button type="submit" class="btn btn-delete btn-sm rounded-pill">Delete</button>
                                                 </form>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -60,4 +57,57 @@
     </div>
 </div>
 
+@endsection
+
+@section('styles')
+<style>
+    .transform-hover:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .text-truncate {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .btn-edit {
+        background: linear-gradient(135deg, #f0c27b, #4b1248);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-edit:hover {
+        background: linear-gradient(135deg, #ff914d, #c53f82);
+        transform: translateY(-2px);
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, #ff4e50, #f9d423);
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        text-transform: uppercase;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-delete:hover {
+        background: linear-gradient(135deg, #ff7043, #f57c00);
+        transform: translateY(-2px);
+    }
+
+    .card-title {
+        font-weight: bold;
+    }
+
+    .card-body {
+        padding: 1.25rem;
+    }
+</style>
 @endsection
