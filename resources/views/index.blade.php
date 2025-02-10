@@ -305,7 +305,7 @@ body::before {
                                             <a href="#">{{ $post->title }}</a>
                                         </h3>
                                         <span class="user-name">
-                                           @ {{ $post->user->name }}
+                                            <i class="fa-solid fa-user"></i> {{ $post->user->name }}
                                         </span>
                                         <p>{{ Str::limit($post->content, 100) }}</p>
 
