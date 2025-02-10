@@ -6,6 +6,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LandingpageController;
+use App\Http\Controllers\PostUserController;
+
 
 
 Route::get('/', [UserController::class, 'login'])->name('login');
@@ -16,6 +18,10 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
 
 Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');
+
+Route::get('/user/posts/create', [PostUserController::class, 'create'])->name('user.posts.create');
+Route::post('/user/posts/store', [PostUserController::class, 'store'])->name('user.posts.store');
+
 Route::get('/admin', [AdminController::class, 'index'])->name('index_admin')->middleware('auth');;
 
 Route::group(['middleware' => ['auth']], function () {

@@ -35,23 +35,28 @@ class PostController extends Controller
     // Menyimpan posting baru
     public function store(Request $request)
     {
-        // Validate incoming request
         $request->validate([
-            'user_id' => 'required|exists:users,id',  // Ensure user_id is valid
             'title' => 'required|string|max:255',
             'content' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
         ]);
 
-        // Create the new post with the selected user_id
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('posts', 'public'); // Simpan gambar ke storage
+        }
+
         Post::create([
-            'user_id' => $request->user_id,  // Use the user_id from the form
             'title' => $request->title,
             'content' => $request->content,
+            'image' => $imagePath, // Simpan path gambar
+            'user_id' => Auth::id(),
         ]);
 
-        // Redirect to posts list with success message
-        return redirect()->route('admin.posts.index')->with('success', 'Post created successfully.');
+        return redirect()->route('admin.posts.index')->with('success', 'Post berhasil dibuat');
     }
+
 
     // Menampilkan form untuk mengedit posting
     public function edit($id)

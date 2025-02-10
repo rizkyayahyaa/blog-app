@@ -82,7 +82,7 @@ body::before {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="customer-favourite.html">
+                                    <a href="{{ route('user.posts.create') }}">
                                         <i class="feather-plus"></i> <span>Create Posts</span>
                                     </a>
                                 </li>
@@ -230,4 +230,19 @@ body::before {
 <script src="assets/js/bootstrap-datetimepicker.min.js"></script>
 <!-- Custom JS -->
 <script src="assets/js/script.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    @if(session('success'))
+        Swal.fire({
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            icon: 'success',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            window.location.href = "{{ route('user.posts.index') }}";
+        });
+    @endif
+</script>
+
 @endsection
