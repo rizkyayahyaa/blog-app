@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="d-flex justify-content-between">
-                    <a href="#" class="btn btn-danger">Cancel</a>
+                    <a href="{{ route('dashboard') }}" class="btn btn-danger">Cancel</a>
                     <button type="submit" class="btn btn-primary">Create Post</button>
                 </div>
             </form>
