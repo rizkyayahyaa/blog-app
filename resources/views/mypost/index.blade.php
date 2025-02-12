@@ -29,6 +29,7 @@
 
                                             <div class="mt-3 d-flex justify-content-between">
                                                 <a href="{{ route('mypost.edit', $post->id) }}" class="btn btn-edit btn rounded-pill">Edit</a>
+                                                <a href="{{ route('mypost.edit', $post->id) }}" class="btn btn-edit btn rounded-pill">Archive</a>
 
                                                 <form action="{{ route('mypost.destroy', $post->id) }}" method="POST" class="d-inline">
                                                     @csrf
