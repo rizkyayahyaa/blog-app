@@ -32,6 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/mypost/{id}/edit', [MyPostController::class, 'edit'])->name('mypost.edit');
     Route::put('/mypost/{id}', [MyPostController::class, 'update'])->name('mypost.update');
     Route::delete('/mypost/{id}', [MyPostController::class, 'destroy'])->name('mypost.destroy');
+
+    Route::post('/posts/{post_id}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
 });
 
 Route::get('/profile', [UserController::class, 'show'])->name('user.profile');

@@ -1,5 +1,5 @@
 @extends('layout.mainlayout')
-
+@include('comments', ['post' => $post])
 @section('content')
 
 <div class="main-wrapper">

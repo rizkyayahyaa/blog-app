@@ -39,6 +39,23 @@
             window.location.href = "{{ route('user.posts.index') }}";
         });
     @endif
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // Handle reply button clicks
+        document.querySelectorAll('.reply-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                const commentId = this.getAttribute('data-comment-id');
+                const replyForm = document.getElementById(`reply-form-${commentId}`);
+
+                // Toggle reply form visibility
+                if (replyForm.style.display === 'none') {
+                    replyForm.style.display = 'block';
+                } else {
+                    replyForm.style.display = 'none';
+                }
+            });
+        });
+    });
 </script>
 
 <!-- Custom Style for Background -->
@@ -163,7 +180,47 @@ body::before {
     color: #fff;
 }
 
+.comments-section {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
 
+.comment-item {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+.comment-header {
+    margin-bottom: 5px;
+}
+
+.reply-item {
+    background: #fff;
+    border-radius: 6px;
+    padding: 8px;
+    margin-left: 20px;
+    border: 1px solid #eee;
+}
+
+.comment-actions {
+    margin-top: 5px;
+}
+
+.btn-link {
+    padding: 0;
+    font-size: 0.875rem;
+    text-decoration: none;
+}
+
+.reply-form {
+    background: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
 
 </style>
 
@@ -300,41 +357,118 @@ body::before {
                                             </span></a>
                                         </div>
                                     </div>
-                                    <div class="service-content card-body">
-                                        <h3 class="title">
-                                            <a href="#">{{ $post->title }}</a>
-                                        </h3>
-                                        <span class="user-name">
-                                            <i class="fa-solid fa-user"></i> {{ $post->user->name }}
-                                        </span>
-                                        <p>{{ Str::limit($post->content, 100) }}</p>
+                                    <!-- Inside your post card -->
+                                        <div class="service-content card-body">
+                                            <!-- Post content stays the same -->
+                                            <h3 class="title">
+                                                <a href="#">{{ $post->title }}</a>
+                                            </h3>
+                                            <span class="user-name">
+                                                <i class="fa-solid fa-user"></i> {{ $post->user->name }}
+                                            </span>
+                                            <p>{{ Str::limit($post->content, 100) }}</p>
 
-                                        <!-- Post Actions -->
-                                        <div class="post-actions">
-                                            <div class="like-share">
-                                                <button class="btn-like" data-toggle="tooltip" title="Like this post">
-                                                    <i class="fas fa-heart"></i> Like
-                                                </button>
-                                                <button class="btn-share">
-                                                    <i class="fas fa-share"></i> Share
-                                                </button>
-                                            </div>
-                                            <div class="comments">
-                                                <a href="#">View Comments (3)</a>
+                                            <!-- Comments Section -->
+                                            <div class="comments-section">
+                                                <!-- Comment Form -->
+                                                <form action="{{ route('comments.store') }}" method="POST" class="mb-3">
+                                                    @csrf
+                                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                                    <div class="form-group">
+                                                        <textarea class="form-control" name="content" rows="2" placeholder="Write your comment..."></textarea>
+                                                        <button type="submit" class="btn btn-primary btn-sm mt-2">Post Comment</button>
+                                                    </div>
+                                                </form>
+
+
+                                                <!-- Display Comments -->
+                                                @if($post->comments->count() > 0)
+                                                    @foreach($post->comments as $comment)
+                                                        <div class="comment-item mb-3">
+                                                            <div class="d-flex">
+                                                                <div class="avatar me-2">
+                                                                    @if($comment->user->image)
+                                                                        <img src="{{ asset('storage/' . $comment->user->image) }}" alt="User" class="rounded-circle" width="40">
+                                                                    @else
+                                                                        <img src="{{ asset('assets/img/default-avatar.png') }}" alt="Default" class="rounded-circle" width="40">
+                                                                    @endif
+                                                                </div>
+                                                                <div class="comment-content flex-grow-1">
+                                                                    <div class="comment-header">
+                                                                        <strong>{{ $comment->user->name }}</strong>
+                                                                        <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
+                                                                    </div>
+                                                                    <p class="mb-1">{{ $comment->content }}</p>
+
+                                                                    <!-- Reply Button & Form -->
+                                                                    <div class="comment-actions">
+                                                                        <button class="btn btn-sm btn-link reply-toggle" data-comment-id="{{ $comment->id }}">
+                                                                            Reply
+                                                                        </button>
+                                                                        @if(Auth::id() == $comment->user_id)
+                                                                            <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="d-inline">
+                                                                                @csrf
+                                                                                @method('DELETE')
+                                                                                <button type="submit" class="btn btn-sm btn-link text-danger">Delete</button>
+                                                                            </form>
+                                                                        @endif
+                                                                    </div>
+
+                                                                    <!-- Reply Form -->
+                                                                    <!-- Reply Form -->
+                                                                    <div class="reply-form mt-2" id="reply-form-{{ $comment->id }}" style="display: none;">
+                                                                        <form action="{{ route('comments.store') }}" method="POST">
+                                                                            @csrf
+                                                                            <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                                                            <input type="hidden" name="parent_comment_id" value="{{ $comment->id }}">
+                                                                            <div class="form-group">
+                                                                                <textarea class="form-control form-control-sm" name="content" rows="2" placeholder="Write your reply..."></textarea>
+                                                                                <button type="submit" class="btn btn-primary btn-sm mt-2">Reply</button>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+
+                                                                    <!-- Display Replies -->
+                                                                    @if($comment->replies->count() > 0)
+                                                                        <div class="replies ms-4 mt-2">
+                                                                            @foreach($comment->replies as $reply)
+                                                                                <div class="reply-item mb-2">
+                                                                                    <div class="d-flex">
+                                                                                        <div class="avatar me-2">
+                                                                                            @if($reply->user->image)
+                                                                                                <img src="{{ asset('storage/' . $reply->user->image) }}" alt="User" class="rounded-circle" width="30">
+                                                                                            @else
+                                                                                                <img src="{{ asset('assets/img/default-avatar.png') }}" alt="Default" class="rounded-circle" width="30">
+                                                                                            @endif
+                                                                                        </div>
+                                                                                        <div class="reply-content">
+                                                                                            <div class="reply-header">
+                                                                                                <strong>{{ $reply->user->name }}</strong>
+                                                                                                <small class="text-muted">{{ $reply->created_at->diffForHumans() }}</small>
+                                                                                            </div>
+                                                                                            <p class="mb-1">{{ $reply->content }}</p>
+                                                                                            @if(Auth::id() == $reply->user_id)
+                                                                                                <form action="{{ route('comments.destroy', $reply->id) }}" method="POST" class="d-inline">
+                                                                                                    @csrf
+                                                                                                    @method('DELETE')
+                                                                                                    <button type="submit" class="btn btn-sm btn-link text-danger">Delete</button>
+                                                                                                </form>
+                                                                                            @endif
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    <p class="text-muted">No comments yet. Be the first to comment!</p>
+                                                @endif
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <!-- Input Comment Section -->
-                                    <div class="comment-input card-footer">
-                                        <form action="#" method="POST">
-                                            <div class="form-group">
-                                                <textarea class="form-control" rows="2" placeholder="Write your comment here..."></textarea>
-                                                <br>
-                                                <button type="submit" class="btn btn-primary btn-sm">Post Comment</button>
-                                            </div>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
 

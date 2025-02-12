@@ -11,23 +11,11 @@ class PostController extends Controller
 {
     public function index()
     {
+        $posts = Post::with(['user', 'comments.user', 'comments.replies.user'])
+            ->latest()
+            ->paginate(10);
 
-        $search = $request->get('search');
-
-        if ($search) {
-            $posts = Post::where('title', 'like', '%' . $search . '%')
-                ->orWhere('content', 'like', '%' . $search . '%')
-                ->paginate(10)
-                ->appends(['search' => $search]);
-        } else {
-            $posts = Post::paginate(10);
-        }
-
-        $posts = Post::latest()->get();
-
-        $users = User::all();
-
-        return view('admin.posts.index', compact('posts', 'users'));
+        return view('index', compact('posts'));
     }
 
     public function create()
