@@ -24,10 +24,15 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');
 Route::get('/dashboard', [PostUserController::class, 'index'])->name('dashboard');
 Route::get('/customer-chat', [CustomerChatController::class, 'index'])->name('customer.chat');
-Route::get('/mypost/mypost', [IndexController::class, 'index'])->name('mypost.mypost'); // Changed from mypost.mypost
+Route::get('/mypost/mypost', [IndexController::class, 'index'])->name('mypost.mypost');
+
+
+// Changed from mypost.mypost
 
 
 Route::middleware('auth')->group(function () {
+    Route::get('/mypost/archive', [PostController::class, 'archive'])->name('mypost.archive');
+    Route::post('/mypost/archive/{id}', [PostController::class, 'archive'])->name('mypost.archive');
     Route::get('/mypost', [MyPostController::class, 'index'])->name('mypost.index'); // Changed from mypost.mypost
     Route::get('/mypost/{id}/edit', [MyPostController::class, 'edit'])->name('mypost.edit');
     Route::put('/mypost/{id}', [MyPostController::class, 'update'])->name('mypost.update');

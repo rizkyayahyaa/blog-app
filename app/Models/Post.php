@@ -11,7 +11,8 @@ class Post extends Model
         'title',
         'content',
         'image',
-        'user_id'
+        'user_id',
+        'is_archived'
     ];
 
     public function user()

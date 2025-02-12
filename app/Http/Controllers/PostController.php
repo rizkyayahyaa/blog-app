@@ -49,6 +49,24 @@ class PostController extends Controller
         return redirect()->route('admin.posts.index')->with('success', 'Post berhasil dibuat');
     }
 
+    public function archive($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->is_archived = true;
+        $post->save();
+
+        return redirect()->route('mypost.index')->with('success', 'Post archived successfully');
+    }
+
+    // Menyimpan status arsip pada postingan
+    public function storeArchive(Post $post)
+    {
+        // Mengubah status arsip pada postingan
+        $post->update(['is_archived' => true]);
+
+        return redirect()->route('mypost.index')->with('success', 'Post Archived Successfully');
+    }
+
 
     public function edit($id)
     {
