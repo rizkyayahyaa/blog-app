@@ -139,7 +139,7 @@
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
             <!-- Statistics Widget -->
-            <div class="col-lg-3 col-sm-6 col-12 d-flex widget-path widget-service">
+            <div class="col-lg-6 col-sm-6 col-12 d-flex widget-path widget-service">
                 <div class="card">
                     <div class="card-body">
                         <div class="home-user">
