@@ -297,7 +297,7 @@ body::before {
 
 
                 <div class="col-md-8 col-lg-9">
-                    <form action="{{ route('user.posts.index') }}" method="GET">
+                    <form action="{{ route('search.posts') }}" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Search posts..." value="{{ request()->get('search') }}">
                             <div class="input-group-append">
@@ -307,6 +307,7 @@ body::before {
                             </div>
                         </div>
                     </form>
+
                     <br>
                     <!-- Sort -->
                     <div class="row align-items-center">

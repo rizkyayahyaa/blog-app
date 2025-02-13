@@ -11,6 +11,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerChatController;
 use App\Http\Controllers\MyPostController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\SearchPostController;
+
 
 
 
@@ -57,6 +59,7 @@ Route::get('/admin', [AdminController::class, 'index'])->name('index_admin')->mi
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/search/posts', [SearchPostController::class, 'search'])->name('search.posts');
     Route::get('posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('posts', [PostController::class, 'store'])->name('posts.store');
