@@ -11,6 +11,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerChatController;
 use App\Http\Controllers\MyPostController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\SearchPostController;
+use App\Http\Controllers\ChatController;
+
+
 
 
 
@@ -39,12 +43,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/mypost/{id}', [MyPostController::class, 'destroy'])->name('mypost.destroy');
 
     Route::post('/posts/{post_id}/comments', [CommentController::class, 'store'])->name('comments.store');
-
     Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
 });
 
 Route::get('/profile', [UserController::class, 'show'])->name('user.profile');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/customer/chats', [ChatController::class, 'chatList'])->name('customer.chatList');
+    Route::get('/customer/chat/{receiverId}', [ChatController::class, 'index'])->name('customer.chat');
+    Route::post('/customer/chat/{receiverId}', [ChatController::class, 'sendMessage'])->name('customer.sendMessage');
+});
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
@@ -57,6 +66,7 @@ Route::get('/admin', [AdminController::class, 'index'])->name('index_admin')->mi
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/search/posts', [SearchPostController::class, 'search'])->name('search.posts');
     Route::get('posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('posts', [PostController::class, 'store'])->name('posts.store');

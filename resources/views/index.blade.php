@@ -272,8 +272,12 @@ body::before {
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('customer.chat') }}">
-                                        <i class="feather-message-circle"></i> <span>Direct Messages</span>
+                                    <a href="{{ route('customer.chatList') }}">
+                                        <i class="feather-message-circle"></i>
+                                        <span>Direct Messages</span>
+                                        {{-- @if($unreadCount > 0)
+                                            <span class="badge rounded-pill bg-primary float-end">{{ $unreadCount }}</span>
+                                        @endif --}}
                                     </a>
                                 </li>
                                 <li>
@@ -297,7 +301,7 @@ body::before {
 
 
                 <div class="col-md-8 col-lg-9">
-                    <form action="{{ route('user.posts.index') }}" method="GET">
+                    <form action="{{ route('search.posts') }}" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Search posts..." value="{{ request()->get('search') }}">
                             <div class="input-group-append">
@@ -307,34 +311,28 @@ body::before {
                             </div>
                         </div>
                     </form>
+
                     <br>
-                    <!-- Sort -->
+                    {{-- <!-- Sort -->
                     <div class="row align-items-center">
-
                         <div class="col-sm-6 d-flex align-items-center justify-content-end">
-
                             <div class="grid-listview">
                                 <ul>
                                     <li>
-                                        <a href="javascript:void(0);">
-                                            <img src="assets/img/icons/filter-icon.svg" alt="">
+                                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'latest']) }}">
+                                            <i class="feather-arrow-up-circle"></i> Terbaru
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="customer-favourite.html">
-                                            <i class="feather-grid"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="customer-booking.html">
-                                            <i class="feather-list"></i>
+                                        <a href="{{ request()->fullUrlWithQuery(['sort' => 'oldest']) }}">
+                                            <i class="feather-arrow-down-circle"></i> Terlama
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <!-- /Sort -->
+                    <!-- /Sort --> --}}
 
                     <div class="row">
                         @if(isset($posts) && $posts->count() > 0)
