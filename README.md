@@ -23,7 +23,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Overview 
 <div style="display: flex;">
-  <img src="https://drive.google.com/file/d/14IPmFnquZEl1oCMcSpHF3m0HWKT7c1rY/view?usp=sharing" width="120px" height="250px">
+  <img src="https://drive.google.com/file/d/14IPmFnquZEl1oCMcSpHF3m0HWKT7c1rY/view?usp=sharing" width="250px" height="120px">
   <img src="https://drive.google.com/uc?export=view&id=1TGNtkOFRS_UWdvc3GhI79Hz6Lc_0vPC0" width="120px" height="250px">
   <img src="https://drive.google.com/uc?export=view&id=12zuyoLLoILR-cz3enrUqyX-GneD1TuoM" width="120px" height="250px">
   <img src="https://drive.google.com/uc?export=view&id=1EgH13X9ut5lxBklpI-39jhUQRoyc1e91" width="120px" height="250px">
