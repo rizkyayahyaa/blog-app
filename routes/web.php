@@ -30,9 +30,6 @@ Route::get('/customer-chat', [CustomerChatController::class, 'index'])->name('cu
 Route::get('/mypost/mypost', [IndexController::class, 'index'])->name('mypost.mypost');
 
 
-
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/mypost/archive', [PostController::class, 'archive'])->name('mypost.archive');
     Route::post('/mypost/archive/{id}', [PostController::class, 'archive'])->name('mypost.archive');

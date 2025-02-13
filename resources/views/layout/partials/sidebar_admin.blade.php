@@ -33,10 +33,10 @@
                     <a class="{{ Request::is('admin/posts*') ? 'active' : '' }}"
                         href="{{ url('/posts') }}"><i class="fa-solid fa-pen"></i> <span>Manajemen Postingan</span></a>
                 </li>
-                <li>
+                {{-- <li>
                     <a class="{{ Request::is('admin/comments*') ? 'active' : '' }}"
                         href="{{ url('/comments') }}"><i class="fa-solid fa-comments"></i> <span>Manajemen Komentar</span></a>
-                </li>
+                </li> --}}
                 <li>
                     <a class="{{ Request::is('admin/statistics*') ? 'active' : '' }}"
                         href="{{ url('/statistics') }}"><i class="fa-solid fa-chart-line"></i> <span>Statistik</span></a>
