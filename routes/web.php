@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('posts/{id}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
     Route::get('posts/{postId}/comments', [CommentController::class, 'index'])->name('comments.index');
+    Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 
     Route::get('users', [UserController::class, 'index'])->name('admin.users.index');

@@ -406,11 +406,12 @@ body::before {
                                                                             Reply
                                                                         </button>
                                                                         @if(Auth::id() == $comment->user_id)
-                                                                            <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" class="d-inline">
-                                                                                @csrf
-                                                                                @method('DELETE')
-                                                                                <button type="submit" class="btn btn-sm btn-link text-danger">Delete</button>
-                                                                            </form>
+                                                                        <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
+                                                                            @csrf
+                                                                            @method('DELETE')
+                                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                                        </form>
+
                                                                         @endif
                                                                     </div>
 
