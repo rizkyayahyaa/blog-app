@@ -13,6 +13,8 @@ use App\Http\Controllers\MyPostController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SearchPostController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\AdminCommentController;
+
 
 
 
@@ -75,7 +77,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
     Route::get('posts/{postId}/comments', [CommentController::class, 'index'])->name('comments.index');
     Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
+    Route::get('/admin/comments', [AdminCommentController::class, 'index'])->name('admin.comments.index');
 
+    Route::resource('comments', AdminCommentController::class, ['as' => 'admin']);
 
     Route::get('users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('users/create', [UserController::class, 'create'])->name('admin.users.create');
