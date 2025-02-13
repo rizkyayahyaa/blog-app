@@ -1,6 +1,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-<title>Rental</title>
+<title>BLOG APP</title>
 
 <!-- Favicons -->
 <link rel="shortcut icon" href="{{ url('assets/img/carss.png') }}">

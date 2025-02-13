@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
 
-
     public function store(Request $request)  // Ubah parameter di sini
     {
         // Validate request

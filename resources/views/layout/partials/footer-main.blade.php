@@ -35,7 +35,7 @@
                             <a href="{{url('/')}}"><img src="{{ URL::asset('/assets/img/best.png')}}" alt="logo"></a>
                         </div>
                         <div class="footer-content">
-                            <p>Car rental is a service allowing individuals or companies to rent vehicles for a short period, ranging from a few hours to several weeks. It's ideal for those who need a temporary vehicle for personal, business, or travel purposes without owning one.</p>
+                            <p>A blog is a platform where individuals or organizations share their thoughts, experiences, and expertise on various topics. It serves as an interactive space for readers to engage with content, offer feedback, and stay updated on new trends, news, and ideas. Blogs can cover anything from personal stories to professional insights, making them a versatile tool for communication and expression.</p>
                         </div>
                         <div class="footer-selects">
                             <h2 class="footer-title">Language & Currency</h2>
