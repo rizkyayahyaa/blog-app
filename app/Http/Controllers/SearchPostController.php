@@ -10,15 +10,34 @@ class SearchPostController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
+        $sort = $request->input('sort'); // Ambil parameter sort
 
-        $posts = Post::when($search, function ($query) use ($search) {
-            return $query->where('title', 'like', "%{$search}%")
-                         ->orWhere('content', 'like', "%{$search}%")
-                         ->orWhereHas('user', function ($query) use ($search) {
-                             $query->where('name', 'like', "%{$search}%");
-                         });
-        })->paginate(10); // Menampilkan hasil pencarian dengan pagination
+        $posts = Post::query();
+
+        // Jika ada pencarian
+        if ($search) {
+            $posts = $posts->where('title', 'like', "%{$search}%")
+                        ->orWhere('content', 'like', "%{$search}%")
+                        ->orWhereHas('user', function ($query) use ($search) {
+                            $query->where('name', 'like', "%{$search}%");
+                        });
+        }
+
+        // Sorting berdasarkan 'sort' parameter
+        if ($sort == 'latest') {
+            $posts = $posts->orderBy('created_at', 'desc');
+        } elseif ($sort == 'oldest') {
+            $posts = $posts->orderBy('created_at', 'asc');
+        } else {
+            // Default sorting berdasarkan terbaru
+            $posts = $posts->orderBy('created_at', 'desc');
+        }
+
+        // Pagination dengan 10 hasil per halaman
+        $posts = $posts->paginate(10);
 
         return view('user.posts.index', compact('posts'));
     }
+
+
 }
