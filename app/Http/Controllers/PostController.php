@@ -9,97 +9,95 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    // Menampilkan semua postingan
     public function index()
     {
-        // Fetch all posts, ordered by the latest first
-        $posts = Post::latest()->get();
+        $posts = Post::with(['user', 'comments.user', 'comments.replies.user'])
+            ->latest()
+            ->paginate(10);
 
-        // Fetch all users
-        $users = User::all();
-
-        // Pass both posts and users to the view
-        return view('admin.posts.index', compact('posts', 'users'));
+        return view('index', compact('posts'));
     }
 
-    // Menampilkan form untuk membuat posting
     public function create()
     {
-        // Fetch all users
         $users = User::all();
 
-        // Pass the users variable to the view
         return view('admin.posts.create', compact('users'));
     }
 
-    // Menyimpan posting baru
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi gambar
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $imagePath = null;
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('posts', 'public'); // Simpan gambar ke storage
+            $imagePath = $request->file('image')->store('posts', 'public');
         }
 
         Post::create([
             'title' => $request->title,
             'content' => $request->content,
-            'image' => $imagePath, // Simpan path gambar
+            'image' => $imagePath,
             'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('admin.posts.index')->with('success', 'Post berhasil dibuat');
     }
 
+    public function archive($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->is_archived = true;
+        $post->save();
 
-    // Menampilkan form untuk mengedit posting
+        return redirect()->route('mypost.index')->with('success', 'Post archived successfully');
+    }
+
+    // Menyimpan status arsip pada postingan
+    public function storeArchive(Post $post)
+    {
+        // Mengubah status arsip pada postingan
+        $post->update(['is_archived' => true]);
+
+        return redirect()->route('mypost.index')->with('success', 'Post Archived Successfully');
+    }
+
+
     public function edit($id)
     {
-        // Find the post to edit
         $post = Post::findOrFail($id);
 
-        // Fetch all users for the user dropdown
         $users = User::all();
 
-        // Pass both post and users to the view
         return view('admin.posts.edit', compact('post', 'users'));
     }
 
-    // Memperbarui posting yang sudah ada
     public function update(Request $request, $id)
     {
-        // Validate incoming request
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
         ]);
 
-        // Find the post to update
         $post = Post::findOrFail($id);
 
-        // Update the post
         $post->update([
             'title' => $request->title,
             'content' => $request->content,
         ]);
 
-        // Redirect to posts list with success message
         return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully.');
     }
 
-    // Menghapus posting
     public function destroy($id)
     {
-        // Find and delete the post
         Post::findOrFail($id)->delete();
 
-        // Redirect to posts list with success message
         return redirect()->route('admin.posts.index')->with('success', 'Post deleted successfully.');
     }
 }

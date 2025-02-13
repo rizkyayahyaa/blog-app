@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    public function show()
+    {
+        // Ambil data pengguna yang sedang login
+        $user = auth()->user();
+
+        // Kirim data pengguna ke view
+        return view('index', compact('user'));
+    }
+
     public function login()
     {
         return view('auth.login');

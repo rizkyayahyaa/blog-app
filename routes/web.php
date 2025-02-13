@@ -10,6 +10,8 @@ use App\Http\Controllers\PostUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CustomerChatController;
 use App\Http\Controllers\MyPostController;
+use App\Http\Controllers\IndexController;
+
 
 
 Route::get('/', [UserController::class, 'login'])->name('login');
@@ -22,10 +24,27 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/index', [LandingpageController::class, 'index'])->name('landingpage')->middleware('auth');
 Route::get('/dashboard', [PostUserController::class, 'index'])->name('dashboard');
 Route::get('/customer-chat', [CustomerChatController::class, 'index'])->name('customer.chat');
+Route::get('/mypost/mypost', [IndexController::class, 'index'])->name('mypost.mypost');
 
-Route::get('/mypost', [MyPostController::class, 'index'])->name('mypost.index');
-Route::get('/mypost/{id}/edit', [MyPostController::class, 'edit'])->name('mypost.edit');
-Route::put('/mypost/{id}', [MyPostController::class, 'update'])->name('mypost.update');
+
+// Changed from mypost.mypost
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/mypost/archive', [PostController::class, 'archive'])->name('mypost.archive');
+    Route::post('/mypost/archive/{id}', [PostController::class, 'archive'])->name('mypost.archive');
+    Route::get('/mypost', [MyPostController::class, 'index'])->name('mypost.index'); // Changed from mypost.mypost
+    Route::get('/mypost/{id}/edit', [MyPostController::class, 'edit'])->name('mypost.edit');
+    Route::put('/mypost/{id}', [MyPostController::class, 'update'])->name('mypost.update');
+    Route::delete('/mypost/{id}', [MyPostController::class, 'destroy'])->name('mypost.destroy');
+
+    Route::post('/posts/{post_id}/comments', [CommentController::class, 'store'])->name('comments.store');
+
+    Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
+});
+
+Route::get('/profile', [UserController::class, 'show'])->name('user.profile');
 
 
 Route::group(['middleware' => 'auth', 'prefix' => 'user'], function () {
@@ -45,6 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('posts/{id}', [PostController::class, 'update'])->name('posts.update');
     Route::delete('posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
     Route::get('posts/{postId}/comments', [CommentController::class, 'index'])->name('comments.index');
+    Route::delete('/comments/{id}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
 
     Route::get('users', [UserController::class, 'index'])->name('admin.users.index');

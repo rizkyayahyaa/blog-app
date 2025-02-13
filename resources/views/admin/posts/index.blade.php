@@ -6,7 +6,7 @@
         <div class="page-header">
             <h4>Posts List</h4>
             <!-- Create Post Button -->
-            <a href="{{ route('posts.create') }}" class="btn btn-primary">Create Post</a>
+            {{-- <a href="{{ route('posts.create') }}" class="btn btn-primary">Create Post</a> --}}
         </div>
 
         <div class="row">
@@ -14,32 +14,34 @@
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Title</th>
-                                    <th>Content</th>
-                                    <th>Post Image</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($posts as $post)
-                                <tr>
-                                    <td>{{ $post->id }}</td>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{{ $post->content }}</td>
-                                    <td>
-                                        @if ($post->image)
-                                            <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" style="max-width: 100px; height: auto;">
-                                        @else
-                                            <span>No Image</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Title</th>
+                                        <th>Content</th>
+                                        <th>Post Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($posts as $post)
+                                    <tr>
+                                        <td>{{ $post->id }}</td>
+                                        <td>{{ $post->title }}</td>
+                                        <td>{{ Str::limit($post->content, 80) }}</td> <!-- Limit content length -->
+                                        <td>
+                                            @if ($post->image)
+                                                <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" style="max-width: 100px; height: auto;">
+                                            @else
+                                                <span>No Image</span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,4 +65,17 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('styles')
+<style>
+    .table-responsive {
+        max-height: 400px;  /* Limit table height */
+        overflow-y: auto;   /* Enable vertical scroll if necessary */
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+    }
+</style>
 @endsection

@@ -29,7 +29,11 @@
                                 <input type="file" name="image" id="image" class="form-control">
                                 <small class="text-muted">Leave empty if you don't want to change the image.</small>
                                 <div class="mt-2">
-                                    <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" width="200">
+                                    @if($post->image)
+                                        <img src="{{ asset('storage/' . $post->image) }}" alt="Post Image" width="200">
+                                    @else
+                                        <p>No image available</p>
+                                    @endif
                                 </div>
                             </div>
 

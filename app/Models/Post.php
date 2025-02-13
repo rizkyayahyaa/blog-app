@@ -11,11 +11,25 @@ class Post extends Model
         'title',
         'content',
         'image',
-        'user_id'
+        'user_id',
+        'is_archived'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)
+                    ->whereNull('parent_comment_id')
+                    ->with('user', 'replies.user');
+    }
+
+    // If you want to get all comments (including replies) you can add this method
+    public function allComments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

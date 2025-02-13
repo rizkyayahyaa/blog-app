@@ -2,67 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
 use App\Models\Post;
-use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function index($postId)
-    {
-        $comments = Comment::where('post_id', $postId)->get();
-        return view('comments.index', compact('comments', 'postId'));
-    }
 
-    public function create($postId)
-    {
-        return view('comments.create', compact('postId'));
-    }
 
-    public function store(Request $request, $postId)
+    public function store(Request $request)  // Ubah parameter di sini
     {
+        // Validate request
         $request->validate([
             'content' => 'required|string',
+            'post_id' => 'required|exists:posts,id',
+            'parent_comment_id' => 'nullable|exists:comments,id'
         ]);
 
+        // Create comment
         Comment::create([
-            'post_id' => $postId,
-            'user_id' => auth()->id(),
+            'post_id' => $request->post_id,
+            'user_id' => Auth::id(),
             'parent_comment_id' => $request->parent_comment_id,
-            'content' => $request->content,
+            'content' => $request->content
         ]);
 
-        return redirect()->route('comments.index', $postId);
-    }
-
-    public function edit($id)
-    {
-        $comment = Comment::findOrFail($id);
-        return view('comments.edit', compact('comment'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'content' => 'required|string',
-        ]);
-
-        $comment = Comment::findOrFail($id);
-        $comment->update([
-            'content' => $request->content,
-        ]);
-
-        return redirect()->route('comments.index', $comment->post_id);
+        return back()->with('success', 'Comment added successfully!');
     }
 
     public function destroy($id)
     {
-        $comment = Comment::findOrFail($id);
-        $postId = $comment->post_id;
+        $comment = Comment::findOrFail($id); // Cari komentar berdasarkan ID
+
+        // Pastikan hanya pemilik komentar atau admin yang bisa menghapus
+        if (auth()->user()->id !== $comment->user_id && !auth()->user()->is_admin) {
+            return redirect()->back()->with('error', 'Unauthorized action.');
+        }
+
         $comment->delete();
 
-        return redirect()->route('comments.index', $postId);
+        return redirect()->back()->with('success', 'Comment deleted successfully.');
     }
-}
 
+}

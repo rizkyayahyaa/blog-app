@@ -255,7 +255,7 @@ body::before {
                                             <div class="form-group">
                                                 <textarea class="form-control" rows="2" placeholder="Write your comment here..."></textarea>
                                                 <br>
-                                                <button type="submit" class="btn btn-primary btn-sm" style="padding: 2px 8px; font-size: 12px;">Post Comment</button>
+                                                {{-- <button type="submit" class="btn btn-primary btn-sm" style="padding: 2px 8px; font-size: 12px;">Post Comment</button> --}}
                                             </div>
                                         </form>
                                     </div>
