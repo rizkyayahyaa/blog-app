@@ -15,6 +15,7 @@ use App\Http\Controllers\SearchPostController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\AdminCommentController;
 use App\Http\Controllers\Admin\StatisticsController;
+use App\Http\Controllers\Admin\ReportController;
 
 Route::get('/', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'authenticate'])->name('login.authenticate');
@@ -29,7 +30,7 @@ Route::get('/customer-chat', [CustomerChatController::class, 'index'])->name('cu
 Route::get('/mypost/mypost', [IndexController::class, 'index'])->name('mypost.mypost');
 
 
-// Changed from mypost.mypost
+
 
 
 Route::middleware('auth')->group(function () {
@@ -78,6 +79,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('comments', AdminCommentController::class, ['as' => 'admin']);
     Route::get('statistics', [StatisticsController::class, 'index'])->name('admin.statistics.index');
 
+    Route::get('reports', [ReportController::class, 'index'])->name('admin.reports.index');
+    Route::get('reports/create', [ReportController::class, 'create'])->name('admin.reports.create');
+    Route::post('reports', [ReportController::class, 'store'])->name('admin.reports.store');
+    Route::get('reports{id}/edit', [ReportController::class, 'edit'])->name('admin.reports.edit');
+    Route::put('reports{id}', [ReportController::class, 'update'])->name('admin.reports.update');
+    Route::delete('reports{id}', [ReportController::class, 'destroy'])->name('admin.reports.destroy');
 
     Route::get('users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('users/create', [UserController::class, 'create'])->name('admin.users.create');
