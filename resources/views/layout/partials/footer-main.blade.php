@@ -79,7 +79,7 @@
                                 <p><span><i class="feather-map-pin"></i></span> 367 Hillcrest Lane, Irvine, California, United States</p>
                             </div>
                             <p><span><i class="feather-phone"></i></span> 321 546 8764</p>
-                            <p class="mb-0"><span><i class="feather-mail"></i></span> rentcars@example.com</p>
+                            <p class="mb-0"><span><i class="feather-mail"></i></span> blogapp@example.com</p>
                         </div>
                     </div>
                     <!-- /Footer Widget -->
