@@ -42,8 +42,8 @@
                         href="{{ url('admin/reports') }}"><i class="fa-solid fa-tags"></i> <span>Kategori Postingan</span></a>
                 </li>
                 <li>
-                    <a class="{{ Request::is('admin/contact-messages*') ? 'active' : '' }}"
-                        href="{{ url('admin/contact-messages') }}"><i class="fa-solid fa-chart-line"></i> <span>Statistik</span></a>
+                    <a class="{{ Request::is('admin/statistics*') ? 'active' : '' }}"
+                        href="{{ url('/statistics') }}"><i class="fa-solid fa-chart-line"></i> <span>Statistik</span></a>
                 </li>
                 <li>
                     <a class="{{ Request::is('admin/contact-messages*') ? 'active' : '' }}"

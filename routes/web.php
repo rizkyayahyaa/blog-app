@@ -14,11 +14,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SearchPostController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\AdminCommentController;
-
-
-
-
-
+use App\Http\Controllers\Admin\StatisticsController;
 
 Route::get('/', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'authenticate'])->name('login.authenticate');
@@ -80,6 +76,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/comments', [AdminCommentController::class, 'index'])->name('admin.comments.index');
 
     Route::resource('comments', AdminCommentController::class, ['as' => 'admin']);
+    Route::get('statistics', [StatisticsController::class, 'index'])->name('admin.statistics.index');
+
 
     Route::get('users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('users/create', [UserController::class, 'create'])->name('admin.users.create');
