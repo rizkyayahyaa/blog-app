@@ -135,6 +135,58 @@
                     </div>
                 </div>
             </div>
+            <!-- Add Chart.js CDN -->
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+            <!-- Statistics Widget -->
+            <div class="col-lg-3 col-sm-6 col-12 d-flex widget-path widget-service">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="home-user">
+                            <div class="home-userhead">
+                                <div class="home-usercount">
+                                    <h6>Statistics</h6>
+                                </div>
+                            </div>
+                            <div class="home-usercontent">
+                                <div class="home-usercontents">
+                                    <h5>Posts per User</h5>
+                                </div>
+                                <div class="homegraph">
+                                    <!-- Chart for Post Statistics -->
+                                    <canvas id="postStatsChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart.js Script -->
+            <script>
+                var ctx = document.getElementById('postStatsChart').getContext('2d');
+                var postStatsChart = new Chart(ctx, {
+                    type: 'bar', // Jenis chart, bisa diganti sesuai kebutuhan
+                    data: {
+                        labels: @json($userIds), // Menampilkan user_id sebagai label
+                        datasets: [{
+                            label: 'Number of Posts',
+                            data: @json($postCounts), // Menampilkan jumlah post per user
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            </script>
+
         </div>
 
         <!-- Tables displaying data -->
