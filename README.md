@@ -22,7 +22,7 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
 ## Overview 
-<img src="{{ asset('assets/img/login.png') }}" alt="My Image" width="400">
-<img src="{{ asset('assets/img/register.png') }}" alt="My Image" width="400">
+<img src="/assets/img/login.png" alt="Login Image" width="400">
+<img src="/assets/img/register.png" alt="Register Image" width="400">
 
 
