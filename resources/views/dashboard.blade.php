@@ -32,7 +32,7 @@
 <style>
 body {
     position: relative;
-    background-image: url('{{ asset('assets/img/best.png') }}');
+    background-image: url('{{ asset('assets/img/bersama.jpg') }}');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

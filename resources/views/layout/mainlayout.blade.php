@@ -14,7 +14,7 @@
       <!-- Custom Background CSS -->
       <style>
         body {
-            background: url('{{ URL::asset('/assets/img/best.png')}}') no-repeat center center fixed;
+            background: url('{{ URL::asset('/assets/img/bersama.jpg')}}') no-repeat center center fixed;
             background-size: cover;
         }
 
